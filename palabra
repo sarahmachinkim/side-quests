@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palabra</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Palabra</h1>
+        <p>A crossword app that teaches languages that Latin-based languages have in common.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>About Palabra</h2>
+            <p>Learn languages effortlessly through crosswords that highlight the shared vocabulary of Latin-based languages.</p>
+        </section>
+
+        <section>
+            <h2>Preview</h2>
+            <div class="image-placeholder" style="width: 100%; height: 300px; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center;">
+                <p>Image area – insert screenshots here</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Join the Waitlist</h2>
+            <p>Be the first to try Palabra. Sign up to receive the APK directly.</p>
+            <form action="#" method="post">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Add Me to the Waitlist</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Sarah Machin Kim. Designed with intention.</p>
+    </footer>
+</body>
+</html>
