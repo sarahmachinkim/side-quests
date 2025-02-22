@@ -1,6 +1,34 @@
-git clone https://github.com/sarahmachinkim/side-quests.git
-cd side-quests
-echo "Hello, GitHub Pages!" > index.html
-git add .
-git commit -m "Initial commit"
-git push origin main
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Quests</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Side Quests</h1>
+        <p>Creative projects to sharpen my mind and make life easier for those I care about.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>About</h2>
+            <p>This site is dedicated to fun and exciting side projects. Explore and enjoy!</p>
+        </section>
+
+        <section>
+            <h2>Projects</h2>
+            <ul>
+                <li><a href="#">Palabra: Learn English through Latin for Spanish, Portuguese, French, and Italian speakers</a></li>
+                <li><a href="#">Call Mom: Never forget to call your mum, even across time zones</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Side Quests. All rights reserved.</p>
+    </footer>
+</body>
+</html>
