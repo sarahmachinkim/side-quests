@@ -72,37 +72,33 @@ p3 {
     color: #6e6e73;
 }
 .projects-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-        .project-box {
-            position: relative;
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            text-decoration: none;
-            display: block;
-            background: white;
-            overflow: hidden;
-        }
-        .project-box::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.15));
-            z-index: 1;
-        }
-        .project-box h3, .project-box p {
-            position: relative;
-            z-index: 2;
-        }
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.project-box {
+    position: relative;
+    width: 45vw;
+    max-width: 500px; 
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    display: block;
+    background: white;
+    overflow: hidden;
+}
+
+.project-box img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    object-fit: cover; 
+}
 
 @media (max-width: 768px) {
     .projects-container {
@@ -113,6 +109,7 @@ p3 {
         width: 90%;
     }
 }
+
 
 footer {
     padding: 40px 20px;
