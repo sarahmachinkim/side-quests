@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARAH MACHIN KIM - CV</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #222;
+        }
+        h1 {
+            font-size: 28px;
+        }
+        h2 {
+            font-size: 22px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+        }
+        p, li {
+            line-height: 1.6;
+        }
+        .contact-info {
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section ul {
+            padding-left: 20px;
+        }
+        .references {
+            font-size: 14px;
+            color: #555;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SARAH MACHIN KIM</h1>
+        <p class="contact-info">
+            <a href="https://www.linkedin.com/in/sarah-machin-kim/">LinkedIn Profile</a> |
+            Product Manager | Product Engineer
+        </p>
+        
+        <div class="section">
+            <h2>Impact & Expertise</h2>
+            <ul>
+                <li><strong>Product Vision & Innovation:</strong> Led mobile app redesign, increasing user engagement by 15%, enhancing UI/UX, and improving BLE stack issues.</li>
+                <li><strong>Strategic Growth & Stakeholder Engagement:</strong> Secured £15M Series A funding, presented at COP26, and coordinated across 20+ stakeholders.</li>
+                <li><strong>Execution & Delivery:</strong> Managed cross-functional teams aligning engineering, design, and marketing for precise product execution.</li>
+                <li><strong>Technical Expertise:</strong> Skilled in firmware, hardware, and product engineering, with expertise in SQL, Python, IoT, and data analysis tools.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Professional Experience</h2>
+            <ul>
+                <li><strong>Product Engineer | Converge (Jan 2024 – Present):</strong> Optimising performance, troubleshooting, and enhancing product designs.</li>
+                <li><strong>Product Manager | Converge (Oct 2020 – Jan 2024):</strong> Led IoT and mobile platform development, improving customer engagement.</li>
+                <li><strong>Architectural Assistant | Benoy (Jun 2019 – Sep 2019):</strong> Managed stakeholder communications and design compliance.</li>
+                <li><strong>Additional Roles in Architecture (2016 – 2018):</strong> Supported project delivery at WY-TO Architects and Brookes Architects.</li>
+            </ul>
+        </div>
+        
+        <div class="section references">
+            <h2>References</h2>
+            <p>Available upon request</p>
+        </div>
+    </div>
+</body>
+</html>
