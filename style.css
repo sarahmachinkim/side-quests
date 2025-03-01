@@ -145,7 +145,7 @@ p3 {
 .hero-container {
     position: relative;
     width: 100vw;
-    height: 300px; /* Adjust height as needed */
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,7 +159,8 @@ p3 {
     height: 100%;
     background-image: url("big background.png");
     background-size: cover;
-    background-position: center;
+    background-position: bottom;
+    background-position: left;
     z-index: 1;
 }
 
@@ -174,8 +175,8 @@ p3 {
 }
 
 .hero-gif {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 90vh;
     z-index: 2;
 }
 
