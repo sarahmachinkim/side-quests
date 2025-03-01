@@ -145,7 +145,7 @@ p3 {
 .hero-container {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,10 +160,8 @@ p3 {
     background-image: url("bigbackground.png");
     background-size: cover;
     background-position: bottom;
-    background-position: left;
     z-index: 1;
 }
-
 .image-wrapper {
     position: absolute;
     width: 50vw;
