@@ -173,8 +173,8 @@ p3 {
 
 .hero-gif {
     position: relative;
-    width: 33vw;
-    height: auto;
+    width: auto;
+    height: 90vh;
     z-index: 2;
 }
 
