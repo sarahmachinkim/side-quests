@@ -168,6 +168,8 @@ p3 {
     background-image: url("bigbackground.png");
     background-size: cover;
     background-position: bottom;
+    background-position: left;
+
     z-index: 1;
 }
 
