@@ -1,11 +1,13 @@
-<html lang="en"><head>
-  <meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
   <title>CODING PROJECTS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link href="window.css" rel="stylesheet">
-  <script src="window.js" defer=""></script>
+  <script src="window.js" defer></script>
 
   <style>
     body {
@@ -15,36 +17,20 @@
       padding: 0;
     }
 
-    #sidebar-placeholder {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 25%;
-      height: 100vh;
-      z-index: 10;
-    }
-
     .window {
-      left: 28%;
+      position: absolute;
     }
-  </style>
-</head>
-<body>
 
-  <div id="sidebar-placeholder">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sticky Sidebar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
+    .personal-icon {
+      width: 250px;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+    }
+
+    .window-body h2 {
+      text-align: center;
       margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Press Start 2P', monospace;
     }
 
     .side-nav {
@@ -86,104 +72,79 @@
       background-color: white;
       color: black;
     }
-
-    .main-wrapper {
-      margin-left: 25%;
-      padding: 20px;
-      background-color: #fff;
-      min-height: 100vh;
-    }
   </style>
+</head>
+<body>
 
+  <nav class="side-nav">
+    <div class="icon-block">
+      <img src="ICON-PERSONAL.svg" alt="Personal Icon" />
+      <div class="icon-label"><a href="smk-cv.html">PERSONAL</a></div>
+    </div>
+    <div class="icon-block">
+      <img src="ICON-CODING-PROJECTS.svg" alt="Coding Projects Icon" />
+      <div class="icon-label"><a href="#">CODING</a></div>
+    </div>
+    <div class="icon-block">
+      <img src="ICON-ARCHITECTURE.svg" alt="Architecture Icon" />
+      <div class="icon-label"><a href="#">ARCHITECTURE</a></div>
+    </div>
+    <div class="icon-block">
+      <img src="ICON-PAINTINGS.svg" alt="Paintings Icon" />
+      <div class="icon-label"><a href="#">PAINTINGS</a></div>
+    </div>
+  </nav>
 
-<nav class="side-nav">
-  <div class="icon-block">
-    <img src="ICON-PERSONAL.svg" alt="Personal Icon">
-    <div class="icon-label"><a href="smk-cv.html">PERSONAL</a></div>
-  </div>
-<div class="icon-block">
-  <img src="ICON-CODING-PROJECTS.svg" alt="Coding Projects Icon">
-  <div class="icon-label"><a href="palabra.html">CODING</a></div>
-</div>
-
-  <div class="icon-block">
-    <img src="ICON-ARCHITECTURE.svg" alt="Architecture Icon">
-    <div class="icon-label"><a href="#">ARCHITECTURE</a></div>
-  </div>
-  <div class="icon-block">
-    <img src="ICON-PAINTINGS.svg" alt="Paintings Icon">
-    <div class="icon-label"><a href="#">PAINTINGS</a></div>
-  </div>
-</nav>
-
-
-  <div class="main-wrapper">
-
-  </div>
-
-
-
-</div>
-
-  <div class="window" style="width: 521px; height: 575px;">
+  <!-- Window 1 -->
+  <div class="window" style="top: 100px; left: 30%; width: 480px; height: 580px;">
     <div class="window-header">
-      <span class="window-title">CODING PROJECTS</span>
+      <span class="window-title">PALABRA</span>
       <div class="close-btn">X</div>
     </div>
     <div class="window-body">
-  
-  <div class="project-block">
-    <div class="profile-header">
-      <img src="ICON-LANGUAGE.svg" alt="Language App Icon" class="personal-icon">
+      <img src="ICON-LANGUAGE.svg" alt="Language App Icon" class="personal-icon" />
+      <h2>LANGUAGE APP "PALABRA"</h2>
+      <p><strong>PROBLEM</strong><br>PEOPLE OFTEN FEEL HESITANT WHEN LEARNING A NEW LANGUAGE</p>
+      <p><strong>SOLUTION</strong><br>MANY LANGUAGES HAVE WORDS IN COMMON, PARTICULARLY THOSE OF LATIN ORIGIN...</p>
+      <p><strong>EXECUTION</strong><br>PALABRA IS A REACT NATIVE CROSSWORD THAT TEACHES YOU 5 LANGUAGES</p>
+      <p><strong>WHY THIS WORKS</strong><br>COGNITIVE SCIENCE SUGGESTS THAT LEARNING IS MORE EFFECTIVE WHEN EXISTING KNOWLEDGE IS UTILISED</p>
+      <img src="gameandphone.gif" alt="App Demo GIF" class="personal-icon" />
     </div>
-    <h2>LANGUAGE APP "PALABRA"</h2>
-    <p><strong>PROBLEM</strong><br>PEOPLE OFTEN FEEL HESITANT WHEN LEARNING A NEW LANGUAGE</p>
-    <p><strong>SOLUTION</strong><br>MANY LANGUAGES HAVE WORDS IN COMMON, PARTICULARLY THOSE OF LATIN ORIGIN...</p>
-    <p><strong>EXECUTION</strong><br>PALABRA IS A REACT NATIVE CROSSWORD THAT TEACHES YOU 5 LANGUAGES</p>
-    <p><strong>WHY THIS WORKS</strong><br>COGNITIVE SCIENCE SUGGESTS THAT LEARNING IS MORE EFFECTIVE WHEN EXISTING KNOWLEDGE IS UTILISED</p>
-    <img src="gameandphone.gif" alt="App Demo GIF" class="personal-icon">
   </div>
 
-  
-  <div class="project-block">
-    <div class="profile-header">
-      <img src="ICON-CALL-MOM.svg" alt="Language App Icon" class="personal-icon">
+  <!-- Window 2 -->
+  <div class="window" style="top: 160px; left: 36%; width: 480px; height: 580px;">
+    <div class="window-header">
+      <span class="window-title">CALL MOM</span>
+      <div class="close-btn">X</div>
     </div>
-    <h2>PRODUCTIVITY APP "CALL MOM"</h2>
-    <p><strong>PROBLEM</strong><br>PEOPLE OFTEN FEEL HESITANT WHEN LEARNING A NEW LANGUAGE</p>
-    <p><strong>SOLUTION</strong><br>MANY LANGUAGES HAVE WORDS IN COMMON, PARTICULARLY THOSE OF LATIN ORIGIN...</p>
-    <p><strong>EXECUTION</strong><br>PALABRA IS A REACT NATIVE CROSSWORD THAT TEACHES YOU 5 LANGUAGES</p>
-    <p><strong>WHY THIS WORKS</strong><br>COGNITIVE SCIENCE SUGGESTS THAT LEARNING IS MORE EFFECTIVE WHEN EXISTING KNOWLEDGE IS UTILISED</p>
-    <img src="callmomlong.gif" alt="App Demo GIF" class="personal-icon">
-  </div>
-
-  
-  <div class="project-block">
-    <div class="profile-header">
-      <img src="ICON-DIARY.svg" alt="Language App Icon" class="personal-icon">
+    <div class="window-body">
+      <img src="ICON-CALL-MOM.svg" alt="Call Mom Icon" class="personal-icon" />
+      <h2>PRODUCTIVITY APP "CALL MOM"</h2>
+      <p><strong>PROBLEM</strong><br>PEOPLE OFTEN FORGET TO CHECK IN WITH FAMILY</p>
+      <p><strong>SOLUTION</strong><br>A SIMPLE DAILY REMINDER THAT CENTRES RELATIONSHIPS</p>
+      <p><strong>EXECUTION</strong><br>REACT NATIVE APP WITH PUSH NOTIFICATIONS</p>
+      <p><strong>WHY THIS WORKS</strong><br>SMALL, REPEATED ACTIONS BUILD MEANINGFUL HABITS</p>
+      <img src="callmomlong.gif" alt="App Demo GIF" class="personal-icon" />
     </div>
-    <h2>AI DIARY APP "BESTIE"</h2>
-    <p><strong>PROBLEM</strong><br>PEOPLE OFTEN FEEL HESITANT WHEN LEARNING A NEW LANGUAGE</p>
-    <p><strong>SOLUTION</strong><br>MANY LANGUAGES HAVE WORDS IN COMMON, PARTICULARLY THOSE OF LATIN ORIGIN...</p>
-    <p><strong>EXECUTION</strong><br>PALABRA IS A REACT NATIVE CROSSWORD THAT TEACHES YOU 5 LANGUAGES</p>
-    <p><strong>WHY THIS WORKS</strong><br>COGNITIVE SCIENCE SUGGESTS THAT LEARNING IS MORE EFFECTIVE WHEN EXISTING KNOWLEDGE IS UTILISED</p>
-    <img src="gameandphone.gif" alt="App Demo GIF" class="personal-icon">
-  </div>
-</div>
-
-
   </div>
 
-  <script>
-    fetch('sidebar.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('sidebar-placeholder').innerHTML = html;
-      });
-  </script>
+  <!-- Window 3 -->
+  <div class="window" style="top: 220px; left: 42%; width: 480px; height: 580px;">
+    <div class="window-header">
+      <span class="window-title">BESTIE</span>
+      <div class="close-btn">X</div>
+    </div>
+    <div class="window-body">
+      <img src="ICON-DIARY.svg" alt="Diary App Icon" class="personal-icon" />
+      <h2>AI DIARY APP "BESTIE"</h2>
+      <p><strong>PROBLEM</strong><br>JOURNALLING IS HARD TO KEEP UP CONSISTENTLY</p>
+      <p><strong>SOLUTION</strong><br>AN AI FRIEND WHO PROMPTS, LISTENS & REFLECTS</p>
+      <p><strong>EXECUTION</strong><br>CHAT INTERFACE POWERED BY GPT, STORED LOCALLY</p>
+      <p><strong>WHY THIS WORKS</strong><br>EMOTIONAL SELF-REFLECTION IN A PRIVATE SETTING</p>
+      <img src="gameandphone.gif" alt="App Demo GIF" class="personal-icon" />
+    </div>
+  </div>
 
-
-
-
-
-</body></html>
+</body>
+</html>
