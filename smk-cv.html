@@ -4,10 +4,36 @@
   <meta charset="UTF-8">
   <title>SMK CV</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link href="window.css" rel="stylesheet">
   <script src="window.js" defer></script>
-</head><body>
+
+  <style>
+    body {
+      background-color: black;
+      font-family: 'Press Start 2P', monospace;
+      margin: 0;
+      padding: 0;
+    }
+
+    #sidebar-placeholder {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 25%;
+      height: 100vh;
+      z-index: 10;
+    }
+
+    .window {
+      left: 28%;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="sidebar-placeholder"></div>
 
   <div class="window">
     <div class="window-header">
@@ -36,5 +62,12 @@
     </div>
   </div>
 
+  <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar-placeholder').innerHTML = html;
+      });
+  </script>
 </body>
 </html>
