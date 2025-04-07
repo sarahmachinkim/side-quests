@@ -16,6 +16,29 @@
   text-transform: uppercase;
   font-size: 10px;
 }
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.personal-icon {
+  width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.contact-icons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.contact-icon {
+  width: 90px; /* half the personal icon width */
+  height: auto;
+}
 
 .window-header {
   background-color: black;
