@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>CODING PROJECTS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link href="window.css" rel="stylesheet">
   <script src="window.js" defer></script>
-
   <style>
     body {
       background-color: white;
@@ -32,83 +30,25 @@
       text-align: center;
       margin: 0;
     }
-
-    .side-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 25%;
-      height: 100vh;
-      background-color: black;
-      padding: 40px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 40px;
-      z-index: 999;
-    }
-
-    .icon-block {
-      text-align: center;
-    }
-
-    .side-nav img {
-      height: 100px;
-      width: auto;
-      display: block;
-      margin: 0 auto 10px;
-    }
-
-    .icon-label a {
-      text-decoration: none;
-      color: white;
-      font-size: 10px;
-      padding: 4px 8px;
-      display: inline-block;
-      transition: all 0.2s ease;
-    }
-
-    .icon-label a:active {
-      background-color: white;
-      color: black;
-    }
   </style>
 </head>
 <body>
 
-  <nav class="side-nav">
-    <div class="icon-block">
-      <img src="ICON-PERSONAL.svg" alt="Personal Icon" />
-      <div class="icon-label"><a href="smk-cv.html">PERSONAL</a></div>
-    </div>
-    <div class="icon-block">
-      <img src="ICON-CODING-PROJECTS.svg" alt="Coding Projects Icon" />
-      <div class="icon-label"><a href="#">CODING</a></div>
-    </div>
-    <div class="icon-block">
-      <img src="ICON-ARCHITECTURE.svg" alt="Architecture Icon" />
-      <div class="icon-label"><a href="#">ARCHITECTURE</a></div>
-    </div>
-    <div class="icon-block">
-      <img src="ICON-PAINTINGS.svg" alt="Paintings Icon" />
-      <div class="icon-label"><a href="#">PAINTINGS</a></div>
-    </div>
-  </nav>
-
+  <div id="sidebar-placeholder"></div>
 
   <div class="window" style="top: 100px; left: 30%; width: 480px; height: 1000px;">
-      <div class="window-header">
+    <div class="window-header">
       <span class="window-title">BESTIE</span>
       <div class="close-btn">X</div>
     </div>
     <div class="window-body">
-      <img src="ICON-DIARY.svg" alt="Diary App Icon" class="personal-icon" />
+      <img src="ICON-DIARY.svg" alt="Diary App Icon" class="personal-icon">
       <h2>AI DIARY APP "BESTIE"</h2>
       <p><strong>PROBLEM</strong><br>JOURNALLING IS HARD TO KEEP UP CONSISTENTLY</p>
       <p><strong>SOLUTION</strong><br>AN AI FRIEND WHO PROMPTS, LISTENS & REFLECTS</p>
       <p><strong>EXECUTION</strong><br>CHAT INTERFACE POWERED BY GPT, STORED LOCALLY</p>
       <p><strong>WHY THIS WORKS</strong><br>EMOTIONAL SELF-REFLECTION IN A PRIVATE SETTING</p>
-      <img src="gameandphone.gif" alt="App Demo GIF" class="personal-icon" />
+      <img src="gameandphone.gif" alt="App Demo GIF" class="personal-icon">
     </div>
   </div>
 
@@ -118,32 +58,39 @@
       <div class="close-btn">X</div>
     </div>
     <div class="window-body">
-      <img src="ICON-CALL-MOM.svg" alt="Call Mom Icon" class="personal-icon" />
+      <img src="ICON-CALL-MOM.svg" alt="Call Mom Icon" class="personal-icon">
       <h2>PRODUCTIVITY APP "CALL MOM"</h2>
       <p><strong>PROBLEM</strong><br>PEOPLE OFTEN FORGET TO CHECK IN WITH FAMILY</p>
       <p><strong>SOLUTION</strong><br>A SIMPLE DAILY REMINDER THAT CENTRES RELATIONSHIPS</p>
       <p><strong>EXECUTION</strong><br>REACT NATIVE APP WITH PUSH NOTIFICATIONS</p>
       <p><strong>WHY THIS WORKS</strong><br>SMALL, REPEATED ACTIONS BUILD MEANINGFUL HABITS</p>
-      <img src="callmomlong.gif" alt="App Demo GIF" class="personal-icon" />
+      <img src="callmomlong.gif" alt="App Demo GIF" class="personal-icon">
     </div>
   </div>
 
   <div class="window" style="top: 220px; left: 42%; width: 480px; height: 1100px;">
-
     <div class="window-header">
       <span class="window-title">PALABRA</span>
       <div class="close-btn">X</div>
     </div>
     <div class="window-body">
-      <img src="ICON-LANGUAGE.svg" alt="Language App Icon" class="personal-icon" />
+      <img src="ICON-LANGUAGE.svg" alt="Language App Icon" class="personal-icon">
       <h2>LANGUAGE APP "PALABRA"</h2>
       <p><strong>PROBLEM</strong><br>PEOPLE OFTEN FEEL HESITANT WHEN LEARNING A NEW LANGUAGE</p>
       <p><strong>SOLUTION</strong><br>MANY LANGUAGES HAVE WORDS IN COMMON, PARTICULARLY THOSE OF LATIN ORIGIN...</p>
       <p><strong>EXECUTION</strong><br>PALABRA IS A REACT NATIVE CROSSWORD THAT TEACHES YOU 5 LANGUAGES</p>
       <p><strong>WHY THIS WORKS</strong><br>COGNITIVE SCIENCE SUGGESTS THAT LEARNING IS MORE EFFECTIVE WHEN EXISTING KNOWLEDGE IS UTILISED</p>
-      <img src="gameandphone.gif" alt="App Demo GIF" class="personal-icon" />
+      <img src="gameandphone.gif" alt="App Demo GIF" class="personal-icon">
     </div>
   </div>
+
+  <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar-placeholder').innerHTML = html;
+      });
+  </script>
 
 </body>
 </html>
