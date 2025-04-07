@@ -24,7 +24,7 @@
 }
 
 .personal-icon {
-  width: 200px;
+  width: 150px;
   height: auto;
   margin-bottom: 10px;
 }
@@ -36,7 +36,7 @@
 }
 
 .contact-icon {
-  width: 90px; /* half the personal icon width */
+  width: 75px; /* half the personal icon width */
   height: auto;
 }
 
