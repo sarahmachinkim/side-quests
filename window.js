@@ -1,79 +1,28 @@
-<style>
-  .window {
-    position: absolute;
-    top: 100px;
-    left: 100px;
-    width: 400px;
-    height: 500px;
-    background: white;
-    border: 4px solid black;
-    box-shadow: 8px 8px 0 #333;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    resize: both;
-    z-index: 1000;
-    font-family: 'Press Start 2P', monospace;
-    text-transform: uppercase;
-    font-size: 10px;
-  }
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.window').forEach(windowEl => {
+    const header = windowEl.querySelector('.window-header');
+    const closeBtn = windowEl.querySelector('.close-btn');
 
-  .window-header {
-    background-color: black;
-    color: white;
-    padding: 8px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: move;
-  }
+    let isDragging = false;
+    let offsetX, offsetY;
 
-  .close-btn {
-    width: 16px;
-    height: 16px;
-    background-color: white;
-    color: black;
-    text-align: center;
-    line-height: 16px;
-    font-size: 12px;
-    cursor: pointer;
-  }
+    header.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      offsetX = e.clientX - windowEl.offsetLeft;
+      offsetY = e.clientY - windowEl.offsetTop;
+    });
 
-  .window-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 10px;
-    color: black;
-  }
-</style>
+    document.addEventListener('mouseup', () => isDragging = false);
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.window').forEach(windowEl => {
-      const header = windowEl.querySelector('.window-header');
-      const closeBtn = windowEl.querySelector('.close-btn');
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        windowEl.style.left = (e.clientX - offsetX) + 'px';
+        windowEl.style.top = (e.clientY - offsetY) + 'px';
+      }
+    });
 
-      let isDragging = false;
-      let offsetX, offsetY;
-
-      header.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        offsetX = e.clientX - windowEl.offsetLeft;
-        offsetY = e.clientY - windowEl.offsetTop;
-      });
-
-      document.addEventListener('mouseup', () => isDragging = false);
-
-      document.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-          windowEl.style.left = (e.clientX - offsetX) + 'px';
-          windowEl.style.top = (e.clientY - offsetY) + 'px';
-        }
-      });
-
-      closeBtn.addEventListener('click', () => {
-        windowEl.style.display = 'none';
-      });
+    closeBtn.addEventListener('click', () => {
+      windowEl.style.display = 'none';
     });
   });
-</script>
+});
