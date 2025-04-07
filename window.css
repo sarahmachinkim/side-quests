@@ -67,3 +67,47 @@
   padding: 10px;
   color: black;
 }
+
+@media (max-width: 768px) {
+  .side-nav {
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px 0;
+    z-index: 999;
+  }
+
+  .icon-block {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .side-nav img {
+    height: 60px;
+    width: auto;
+    margin: 0 auto 5px;
+  }
+
+  .icon-label a {
+    font-size: 8px;
+  }
+
+  #sidebar-placeholder {
+    width: 100%;
+    height: auto;
+  }
+
+  .window {
+    left: 0 !important;
+    top: 0 !important;
+    width: 100vw;
+    height: calc(100vh - 100px);
+    max-width: none;
+  }
+}
+
