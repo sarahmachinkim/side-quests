@@ -1,74 +1,103 @@
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pixel Canvas</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+  <title>Pixel Drawer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="window.css">
   <style>
-    body {
-      background-color: white;
-      font-family: 'Press Start 2P', monospace;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 0;
-    }
-
-    h1 {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-
-    #canvas {
+    .pixel-canvas {
       display: grid;
-      grid-template-columns: repeat(50, 10px);
-      grid-template-rows: repeat(50, 10px);
-      gap: 1px;
+      grid-template-columns: repeat(25, 1fr);
+      grid-template-rows: repeat(25, 1fr);
+      width: 500px;
+      height: 500px;
+      margin: 20px auto;
+      border: 2px solid black;
     }
 
     .pixel {
-      width: 10px;
-      height: 10px;
+      width: 100%;
+      height: 100%;
       background-color: white;
-      border: 1px solid #ccc;
+      border: 0.5px solid #ccc;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .colour-btn {
+      width: 40px;
+      height: 40px;
+      border: 2px solid black;
       cursor: pointer;
     }
 
-    .pixel.black {
+    .colour-white {
+      background-color: white;
+    }
+
+    .colour-black {
       background-color: black;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 10px;
-      text-transform: uppercase;
-      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>MAKE YOUR OWN ICON</h1>
-  <div id="canvas"></div>
-  <button onclick="clearCanvas()">CLEAR</button>
+
+  <div class="window" style="top: 50px; left: 50px; width: 600px; height: 650px;">
+    <div class="window-header">
+      <span class="window-title">PIXEL DRAWER</span>
+      <div class="close-btn">X</div>
+    </div>
+    <div class="window-body">
+      <div class="toolbar">
+        <div class="colour-btn colour-black" data-colour="black"></div>
+        <div class="colour-btn colour-white" data-colour="white"></div>
+      </div>
+      <div class="pixel-canvas" id="canvas"></div>
+    </div>
+  </div>
 
   <script>
     const canvas = document.getElementById('canvas');
+    let currentColour = 'black';
+    let isDrawing = false;
 
-    for (let i = 0; i < 2500; i++) {
-      const pixel = document.createElement('div');
-      pixel.classList.add('pixel');
-      pixel.addEventListener('click', () => {
-        pixel.classList.toggle('black');
-      });
-      canvas.appendChild(pixel);
+    function createGrid(size) {
+      for (let i = 0; i < size * size; i++) {
+        const pixel = document.createElement('div');
+        pixel.classList.add('pixel');
+        canvas.appendChild(pixel);
+
+        pixel.addEventListener('mousedown', () => {
+          isDrawing = true;
+          pixel.style.backgroundColor = currentColour;
+        });
+
+        pixel.addEventListener('mouseover', () => {
+          if (isDrawing) {
+            pixel.style.backgroundColor = currentColour;
+          }
+        });
+      }
     }
 
-    function clearCanvas() {
-      document.querySelectorAll('.pixel').forEach(pixel => {
-        pixel.classList.remove('black');
+    document.addEventListener('mouseup', () => {
+      isDrawing = false;
+    });
+
+    document.querySelectorAll('.colour-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentColour = btn.dataset.colour;
       });
-    }
+    });
+
+    createGrid(25);
   </script>
-
-
-</body></html>
+</body>
+</html>
