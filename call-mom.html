@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link href="window.css" rel="stylesheet">
+  <link rel="stylesheet" href="window.css">
   <script src="window.js" defer></script>
 
   <style>
@@ -34,9 +34,9 @@
       display: grid;
       grid-template-columns: repeat(25, 1fr);
       grid-template-rows: repeat(25, 1fr);
-      width: 400px;
-      height: 400px;
-      margin: 20px auto;
+      width: 500px;
+      height: 500px;
+      margin: 0 auto;
       border: 2px solid black;
     }
 
@@ -68,13 +68,17 @@
     .colour-black {
       background-color: black;
     }
+
+    .window-title {
+      text-transform: uppercase;
+    }
   </style>
 </head>
 <body>
 
   <div id="sidebar-placeholder"></div>
 
-  <div class="window" style="top: 5%; left: 30%; width: 500px; height: 600px;">
+  <div class="window" style="top: 5%; left: 30%; width: 600px; height: 650px;">
     <div class="window-header">
       <span class="window-title">PIXEL DRAWER</span>
       <div class="close-btn">X</div>
@@ -115,10 +119,6 @@
             pixel.style.backgroundColor = currentColour;
           }
         });
-
-        pixel.addEventListener('mouseup', () => {
-          isDrawing = false;
-        });
       }
     }
 
@@ -134,5 +134,6 @@
 
     createGrid(25);
   </script>
+
 </body>
 </html>
