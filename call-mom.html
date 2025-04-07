@@ -2,17 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>PIXEL DRAWER</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pixel Drawer</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="window.css">
+  <link href="window.css" rel="stylesheet">
+  <script src="window.js" defer></script>
+
   <style>
+    body {
+      background-color: white;
+      font-family: 'Press Start 2P', monospace;
+      margin: 0;
+      padding: 0;
+    }
+
+    #sidebar-placeholder {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 25%;
+      height: 100vh;
+      z-index: 10;
+    }
+
+    .window {
+      left: 28%;
+    }
+
     .pixel-canvas {
       display: grid;
       grid-template-columns: repeat(25, 1fr);
       grid-template-rows: repeat(25, 1fr);
-      width: 500px;
-      height: 500px;
+      width: 400px;
+      height: 400px;
       margin: 20px auto;
       border: 2px solid black;
     }
@@ -49,7 +72,9 @@
 </head>
 <body>
 
-  <div class="window" style="top: 50px; left: 50px; width: 600px; height: 650px;">
+  <div id="sidebar-placeholder"></div>
+
+  <div class="window" style="top: 5%; left: 30%; width: 500px; height: 600px;">
     <div class="window-header">
       <span class="window-title">PIXEL DRAWER</span>
       <div class="close-btn">X</div>
@@ -64,6 +89,12 @@
   </div>
 
   <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar-placeholder').innerHTML = html;
+      });
+
     const canvas = document.getElementById('canvas');
     let currentColour = 'black';
     let isDrawing = false;
@@ -83,6 +114,10 @@
           if (isDrawing) {
             pixel.style.backgroundColor = currentColour;
           }
+        });
+
+        pixel.addEventListener('mouseup', () => {
+          isDrawing = false;
         });
       }
     }
