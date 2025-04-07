@@ -1,0 +1,137 @@
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>PAINTINGS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+  <link href="window.css" rel="stylesheet">
+  <script src="window.js" defer=""></script>
+
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Press Start 2P', monospace;
+      margin: 0;
+      padding: 0;
+    }
+
+    #sidebar-placeholder {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 25%;
+      height: 100vh;
+      z-index: 10;
+    }
+
+    .window {
+      left: 28%;
+      background-color: black;
+      color: white;
+    }
+
+    .personal-icon {
+      width: 250px;
+      height: auto;
+      display: block;
+      margin: 40px auto 20px;
+    }
+
+    .window-body h2 {
+      color: white;
+      text-align: center;
+      margin: 0;
+    }
+
+    .side-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 25%;
+      height: 100vh;
+      background-color: black;
+      padding: 40px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      z-index: 999;
+    }
+
+    .icon-block {
+      text-align: center;
+    }
+
+    .side-nav img {
+      height: 100px;
+      width: auto;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .icon-label a {
+      text-decoration: none;
+      color: white;
+      font-size: 10px;
+      padding: 4px 8px;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .icon-label a:active {
+      background-color: white;
+      color: black;
+    }
+
+    .main-wrapper {
+      margin-left: 25%;
+      padding: 20px;
+      background-color: #fff;
+      min-height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="side-nav">
+    <div class="icon-block">
+      <img src="ICON-PERSONAL.svg" alt="Personal Icon">
+      <div class="icon-label"><a href="smk-cv.html">PERSONAL</a></div>
+    </div>
+    <div class="icon-block">
+      <img src="ICON-CODING-PROJECTS.svg" alt="Coding Projects Icon">
+      <div class="icon-label"><a href="palabra.html">CODING</a></div>
+    </div>
+    <div class="icon-block">
+      <img src="ICON-PAINTINGS.svg" alt="Architecture Icon">
+      <div class="icon-label"><a href="#">PAINTINGS</a></div>
+    </div>
+    <div class="icon-block">
+      <img src="ICON-PAINTINGS.svg" alt="Paintings Icon">
+      <div class="icon-label"><a href="#">PAINTINGS</a></div>
+    </div>
+  </nav>
+
+  <div class="window" style="width: 486px; height: 635px;">
+    <div class="window-header">
+      <span class="window-title">PAINTINGS</span>
+      <div class="close-btn">X</div>
+    </div>
+    <div class="window-body">
+      <div class="profile-header">
+        <img src="ICON-UNDER-CONSTRUCTION.svg" alt="Under Construction" class="personal-icon">
+      </div>
+      <h2>UNDER CONSTRUCTION</h2>
+    </div>
+  </div>
+
+  <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar-placeholder').innerHTML = html;
+      });
+  </script>
+
+
+</body></html>
