@@ -147,4 +147,9 @@
   .window-body h2 {
     margin-top: 10px;
   }
+  .window-body p {
+  line-height: 2;
+  margin-bottom: 30px;
+  color: #6e6e73;
+}
 }
