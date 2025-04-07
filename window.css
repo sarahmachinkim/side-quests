@@ -34,6 +34,18 @@
   gap: 10px;
   justify-content: center;
 }
+.app-demo-gif {
+  width: 280px;
+  height: 500px;
+  object-fit: cover;
+  margin: 20px auto;
+  display: block;
+  border: 2px solid black;
+}
+.project-block {
+  margin-bottom: 80px;
+}
+
 
 .contact-icon {
   width: 75px; /* half the personal icon width */
