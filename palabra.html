@@ -1,58 +1,161 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PALABRA</title>
-    <link rel="stylesheet" href="style.css">
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>SMK CV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+  <link href="window.css" rel="stylesheet">
+  <script src="window.js" defer=""></script>
+
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Press Start 2P', monospace;
+      margin: 0;
+      padding: 0;
+    }
+
+    #sidebar-placeholder {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 25%;
+      height: 100vh;
+      z-index: 10;
+    }
+
+    .window {
+      left: 28%;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>PALABRA</h1>
-        <p>A crossword app that teaches languages that Latin-based languages have in common.</p>
-    </header>
 
-    <div class="hero-container">
-        <div class="hero-image"></div>
-        <div class="image-wrapper">
-            <img class="hero-gif" src="gameandphone.gif" alt="Choose Language Page Preview">
-        </div>
+  <div id="sidebar-placeholder">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sticky Sidebar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Press Start 2P', monospace;
+    }
+
+    .side-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 25%;
+      height: 100vh;
+      background-color: black;
+      padding: 40px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      z-index: 999;
+    }
+
+    .icon-block {
+      text-align: center;
+    }
+
+    .side-nav img {
+      height: 100px;
+      width: auto;
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    .icon-label a {
+      text-decoration: none;
+      color: white;
+      font-size: 10px;
+      padding: 4px 8px;
+      display: inline-block;
+      transition: all 0.2s ease;
+    }
+
+    .icon-label a:active {
+      background-color: white;
+      color: black;
+    }
+
+    .main-wrapper {
+      margin-left: 25%;
+      padding: 20px;
+      background-color: #fff;
+      min-height: 100vh;
+    }
+  </style>
+
+
+<nav class="side-nav">
+  <div class="icon-block">
+    <img src="ICON-PERSONAL.svg" alt="Personal Icon">
+    <div class="icon-label"><a href="smk-cv.html">PERSONAL</a></div>
+  </div>
+  <div class="icon-block">
+    <img src="ICON-CODING-PROJECTS.svg" alt="Coding Projects Icon">
+    <div class="icon-label"><a href="#">CODING</a></div>
+  </div>
+  <div class="icon-block">
+    <img src="ICON-ARCHITECTURE.svg" alt="Architecture Icon">
+    <div class="icon-label"><a href="#">ARCHITECTURE</a></div>
+  </div>
+  <div class="icon-block">
+    <img src="ICON-PAINTINGS.svg" alt="Paintings Icon">
+    <div class="icon-label"><a href="#">PAINTINGS</a></div>
+  </div>
+</nav>
+
+
+  <div class="main-wrapper">
+
+  </div>
+
+
+
+</div>
+
+  <div class="window" style="width: 486px; height: 635px;">
+    <div class="window-header">
+      <span class="window-title">PERSONAL</span>
+      <div class="close-btn">X</div>
     </div>
+    <div class="window-body">
+  <div class="profile-header">
+    <img src="ICON-LANGUAGE.svg" alt="Personal Icon" class="personal-icon">
 
-    <main>
-        <section>
-            <table>
-                <tr>
-                    <td><h3>Problem</h3></td>
-                    <td><p>People often feel <strong>afraid or hesitant</strong> when learning a new language...</p></td>
-                </tr>
-                <tr>
-                    <td><h3>Solution</h3></td>
-                    <td><p>Many languages, particularly those of <strong>Latin origin</strong>...</p></td>
-                </tr>
-                <tr>
-                    <td><h3>Execution</h3></td>
-                    <td><p>Palabra is a <strong>React Native gamified</strong>...</p></td>
-                </tr>
-                <tr>
-                    <td><h3>Why This Works</h3></td>
-                    <td><p>Cognitive science suggests that <strong>learning is more effective...</p></td>
-                </tr>
-            </table>
-        </section>
 
-        <section>
-            <h2>Join the Waitlist</h2>
-            <p>Be the first to try Palabra. Sign up to receive the APK directly.</p>
-            <form action="#" method="post">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit">Add Me to the Waitlist</button>
-            </form>
-        </section>
-    </main>
+  </div>
 
-    <footer>
-        <p>&copy; 2025 Sarah Machin Kim. Designed with intention.</p>
-    </footer>
-</body>
-</html>
+  <h2>LANGUAGE APP</h2>
+  <p><strong>PROBLEM</strong><br>PEOPLE OFTEN FEEL HESITANT WHEN LEARNING A NEW LANGUAGE<br>
+  </p>
+  <p><strong>SOLUTION</strong><br>MANY LANGUAGES HAVE WORDS IN COMMON, PARTICULARLY THOSE OF LATIN ORIGIN...<br>
+  </p>
+  <p><strong>EXECUTION</strong>
+      <br>PALABRA IS A REACT NATIVE CROSSWORD THAT TEACHES YOU 5 LANGUAGES</p>
+  <p><strong>WHY THIS WORKS</strong>
+      <br>COGNITIVE SCIENCE SUGGESTS THAT LEARNING IS MORE EFFECTIVE WHEN EXISTING KNOWLEDGE IS UTILISED</p>
+</div>
+  </div>
+
+  <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar-placeholder').innerHTML = html;
+      });
+  </script>
+
+
+
+</body></html>
