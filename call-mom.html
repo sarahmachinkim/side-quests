@@ -1,73 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CALL MOM</title>
-    <link rel="stylesheet" href="style.css">
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Canvas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Press Start 2P', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 0;
+    }
+
+    h1 {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    #canvas {
+      display: grid;
+      grid-template-columns: repeat(50, 10px);
+      grid-template-rows: repeat(50, 10px);
+      gap: 1px;
+    }
+
+    .pixel {
+      width: 10px;
+      height: 10px;
+      background-color: white;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    .pixel.black {
+      background-color: black;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 10px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>CALL MOM</h1>
-        <p>A Chrome extension to check if you can call relatives in other time zones.</p>
-    </header>
+  <h1>MAKE YOUR OWN ICON</h1>
+  <div id="canvas"></div>
+  <button onclick="clearCanvas()">CLEAR</button>
 
-    <main>
-        <section>
-            <div class="image-placeholder" style="width: 50%; height: auto; display: flex; align-items: center; justify-content: center;">
-                <img src="callmomlong.gif" alt="Call Mom Preview" style="width: 100%; max-width: 600px; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
-            </div>
-        </section>
-        
-        <section>
-            <table style="width: 100%; border-collapse: collapse;">
-                <tr>
-                    <td style="width: 25%; font-weight: bold; padding: 10px; vertical-align: top;">
-                        <h3>Problem</h3>
-                    </td>
-                    <td style="padding: 40px 10px 10px;">
-                        <p>People with relatives abroad know how frustrating it can be. You want to call your mom, so you google "time in Korea" only to discover it’s the middle of the night – and before you know it, several days have gone by.</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 25%; font-weight: bold; padding: 10px; vertical-align: top;">
-                        <h3>Solution</h3>
-                    </td>
-                    <td style="padding: 40px 10px 10px;">
-                        <p>A Google Chrome extension where you enter the time your mom goes to bed and wakes up, along with her location. The plug-in then shows you whether you should call her, or, if not, tells you how long until you can.</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 25%; font-weight: bold; padding: 10px; vertical-align: top;">
-                        <h3>Execution</h3>
-                    </td>
-                    <td style="padding: 40px 10px 10px;">
-                        <p>A very simple HTML extension that combines data input fields with time zones in a user-friendly design reminiscent of fridge magnets.</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 25%; font-weight: bold; padding: 10px; vertical-align: top;">
-                        <h3>Why This Works</h3>
-                    </td>
-                    <td style="padding: 40px 10px 10px;">
-                        <p>It's simple, yet it still allows a degree of spontaneity when staying in touch – removing the extra steps of remembering to call, checking time zones, doing the calculations, and confirming that it’s an appropriate hour to ring.</p>
-                    </td>
-                </tr>
-            </table>
-        </section>
+  <script>
+    const canvas = document.getElementById('canvas');
 
-        <section>
-            <h2>Join the Waitlist</h2>
-            <p>Be the first to try Call Mom. Sign up to receive the extension directly.</p>
-            <form action="#" method="post">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit">Add Me to the Waitlist</button>
-            </form>
-        </section>
-    </main>
+    for (let i = 0; i < 2500; i++) {
+      const pixel = document.createElement('div');
+      pixel.classList.add('pixel');
+      pixel.addEventListener('click', () => {
+        pixel.classList.toggle('black');
+      });
+      canvas.appendChild(pixel);
+    }
 
-    <footer>
-        <p>&copy; 2025 Sarah Machin Kim. Designed with intention.</p>
-    </footer>
-</body>
-</html>
+    function clearCanvas() {
+      document.querySelectorAll('.pixel').forEach(pixel => {
+        pixel.classList.remove('black');
+      });
+    }
+  </script>
+
+
+</body></html>
