@@ -1,11 +1,13 @@
-<html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
   <title>SMK CV</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link href="window.css" rel="stylesheet">
-  <script src="window.js" defer=""></script>
+  <script src="window.js" defer></script>
 
   <style>
     body {
@@ -27,102 +29,38 @@
     .window {
       left: 28%;
     }
+
+    .personal-icon {
+      width: 150px;
+      height: auto;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .contact-icons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-icon {
+      width: 75px;
+      height: auto;
+    }
+
+    .window-body h2 {
+      text-align: center;
+    }
+
+    .window-body p {
+      line-height: 2;
+    }
   </style>
 </head>
 <body>
 
-  <div id="sidebar-placeholder">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sticky Sidebar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Press Start 2P', monospace;
-    }
-
-    .side-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 25%;
-      height: 100vh;
-      background-color: black;
-      padding: 40px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 40px;
-      z-index: 999;
-    }
-
-    .icon-block {
-      text-align: center;
-    }
-
-    .side-nav img {
-      height: 100px;
-      width: auto;
-      display: block;
-      margin: 0 auto 10px;
-    }
-
-    .icon-label a {
-      text-decoration: none;
-      color: white;
-      font-size: 10px;
-      padding: 4px 8px;
-      display: inline-block;
-      transition: all 0.2s ease;
-    }
-
-    .icon-label a:active {
-      background-color: white;
-      color: black;
-    }
-
-    .main-wrapper {
-      margin-left: 25%;
-      padding: 20px;
-      background-color: #fff;
-      min-height: 100vh;
-    }
-  </style>
-
-
-<nav class="side-nav">
-  <div class="icon-block">
-    <img src="ICON-PERSONAL.svg" alt="Personal Icon">
-    <div class="icon-label"><a href="smk-cv.html">PERSONAL</a></div>
-  </div>
-  <div class="icon-block">
-    <img src="ICON-CODING-PROJECTS.svg" alt="Coding Projects Icon">
-    <div class="icon-label"><a href="#">CODING</a></div>
-  </div>
-  <div class="icon-block">
-    <img src="ICON-ARCHITECTURE.svg" alt="Architecture Icon">
-    <div class="icon-label"><a href="#">ARCHITECTURE</a></div>
-  </div>
-  <div class="icon-block">
-    <img src="ICON-PAINTINGS.svg" alt="Paintings Icon">
-    <div class="icon-label"><a href="#">PAINTINGS</a></div>
-  </div>
-</nav>
-
-
-  <div class="main-wrapper">
-
-  </div>
-
-
-
-</div>
+  <div id="sidebar-placeholder"></div>
 
   <div class="window" style="width: 486px; height: 635px;">
     <div class="window-header">
@@ -130,39 +68,38 @@
       <div class="close-btn">X</div>
     </div>
     <div class="window-body">
-  <div class="profile-header">
-    <img src="ICON-PERSONAL.svg" alt="Personal Icon" class="personal-icon">
-<div class="contact-icons">
-  <a href="mailto:sarahmachinkim@gmail.com">
-    <img src="ICON-EMAIL.svg" alt="Email" class="contact-icon">
-  </a>
-  <a href="https://www.linkedin.com/in/sarah-machin-kim/" target="_blank" rel="noopener noreferrer">
-    <img src="ICON-LINKEDIN.svg" alt="LinkedIn" class="contact-icon">
-  </a>
-</div>
+      <div class="profile-header">
+        <img src="ICON-PERSONAL.svg" alt="Personal Icon" class="personal-icon">
+        <div class="contact-icons">
+          <a href="mailto:sarahmachinkim@gmail.com">
+            <img src="ICON-EMAIL.svg" alt="Email" class="contact-icon">
+          </a>
+          <a href="https://www.linkedin.com/in/sarah-machin-kim/" target="_blank" rel="noopener noreferrer">
+            <img src="ICON-LINKEDIN.svg" alt="LinkedIn" class="contact-icon">
+          </a>
+        </div>
+      </div>
 
-  </div>
+      <h2>SARAH MACHIN KIM.</h2>
 
-  <h2>SARAH MACHIN KIM.</h2>
-  <p><strong>PRODUCT ENGINEER 24–</strong><br>
-    MADE PRODUCT PROFITABLE<br>
-    5 YEAR ROADMAPPING, PRODUCT MARKET FIT, TECHNICAL PROJECT MANAGEMENT, TECHNICAL SUPPORT. LAUNCHED NEW GEOGRAPHIES. INCREASED PRODUCTION YIELD BY 25%.<br>
-    SKILLS: LORA (IOT), HUBSPOT
-  </p>
+      <p><strong>PRODUCT ENGINEER 24–</strong><br>
+        MADE PRODUCT PROFITABLE<br>
+        5 YEAR ROADMAPPING, PRODUCT MARKET FIT, TECHNICAL PROJECT MANAGEMENT, TECHNICAL SUPPORT. LAUNCHED NEW GEOGRAPHIES. INCREASED PRODUCTION YIELD BY 25%.<br>
+        SKILLS: LORA (IOT), HUBSPOT
+      </p>
 
-  <p><strong>PRODUCT MANAGER 20–24</strong><br>
-    SECURED £15M SERIES A FUNDING<br>
-    PRESENTED PRODUCTS AT COP26<br>
-    COORDINATED 20+ STAKEHOLDERS<br>
-    LAUNCHED NEW APP EXPERIENCE<br>
-    SKILLS: SQL, BLE STACK, LORA, AWS, KIBANA, METABASE, ROADMAPPING, FIRMWARE, SOFTWARE, HARDWARE
-  </p>
+      <p><strong>PRODUCT MANAGER 20–24</strong><br>
+        SECURED £15M SERIES A FUNDING<br>
+        PRESENTED PRODUCTS AT COP26<br>
+        COORDINATED 20+ STAKEHOLDERS<br>
+        LAUNCHED NEW APP EXPERIENCE<br>
+        SKILLS: SQL, BLE STACK, LORA, AWS, KIBANA, METABASE, ROADMAPPING, FIRMWARE, SOFTWARE, HARDWARE
+      </p>
 
-  <p><strong>ARCHITECT 16–18</strong><br>
-    GENERAL ARRANGEMENT DRAWINGS, CONSTRUCTION DETAILING, PROJECT DELIVERY.
-  </p>
-</div>
-
+      <p><strong>ARCHITECT 16–18</strong><br>
+        GENERAL ARRANGEMENT DRAWINGS, CONSTRUCTION DETAILING, PROJECT DELIVERY.
+      </p>
+    </div>
   </div>
 
   <script>
@@ -173,5 +110,5 @@
       });
   </script>
 
-
-</body></html>
+</body>
+</html>
