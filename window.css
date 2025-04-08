@@ -98,3 +98,8 @@
   margin-bottom: 40px;
   color: #6e6e73;
 }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
