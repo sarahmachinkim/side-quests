@@ -64,11 +64,14 @@
   </div>
 
   <script>
-    fetch('sidebar.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('sidebar-placeholder').innerHTML = html;
-      });
+fetch('sidebar.html')
+  .then(res => res.text())
+  .then(html => {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = html;
+    document.getElementById('sidebar-placeholder').appendChild(wrapper);
+  });
+
   </script>
 
 </body>
