@@ -27,9 +27,28 @@
     }
 
     .window {
-      left: 28%;
+      position: absolute;
+      top: 5%;
+      left: 30%;
+      width: 486px;
+      height: 635px;
       background-color: black;
       color: white;
+    }
+
+    .window-header {
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .window-title {
+      font-size: 10px;
+    }
+
+    .close-btn {
+      cursor: pointer;
     }
 
     .personal-icon {
@@ -50,7 +69,7 @@
 
   <div id="sidebar-placeholder"></div>
 
-  <div class="window" style="width: 486px; height: 635px;">
+  <div class="window">
     <div class="window-header">
       <span class="window-title">ARCHITECTURE</span>
       <div class="close-btn">X</div>
@@ -64,14 +83,11 @@
   </div>
 
   <script>
-fetch('sidebar.html')
-  .then(res => res.text())
-  .then(html => {
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = html;
-    document.getElementById('sidebar-placeholder').appendChild(wrapper);
-  });
-
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar-placeholder').innerHTML = html;
+      });
   </script>
 
 </body>
