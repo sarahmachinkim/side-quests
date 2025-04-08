@@ -1,11 +1,11 @@
 <style>
-  * {
+  .sidebar-wrapper * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
 
-  .side-nav {
+  .sidebar-wrapper .side-nav {
     position: fixed;
     top: 0;
     left: 0;
@@ -20,27 +20,31 @@
     z-index: 999;
   }
 
-  .icon-block {
+  .sidebar-wrapper .icon-block {
     text-align: center;
   }
 
-  .side-nav img {
+  .sidebar-wrapper .side-nav img {
     height: 100px;
     width: auto;
     display: block;
     margin: 0 auto 10px;
   }
 
-  .icon-label a {
+  .sidebar-wrapper .icon-label {
+    font-size: 10px;
+    color: white;
+  }
+
+  .sidebar-wrapper .icon-label a {
     text-decoration: none;
     color: white;
-    font-size: 10px;
     padding: 4px 8px;
     display: inline-block;
     transition: all 0.2s ease;
   }
 
-  .icon-label a:active {
+  .sidebar-wrapper .icon-label a:active {
     background-color: white;
     color: black;
   }
@@ -76,4 +80,3 @@
     </a>
   </div>
 </nav>
-
