@@ -1,5 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <title>Sidebar</title>
   <style>
     * {
       box-sizing: border-box;
@@ -20,10 +23,25 @@
       align-items: center;
       gap: 40px;
       z-index: 999;
+      font-family: 'Press Start 2P', monospace;
     }
 
     .icon-block {
       text-align: center;
+    }
+
+    .side-nav a {
+      text-decoration: none;
+      color: white;
+      font-size: 10px;
+      display: block;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .side-nav a:active {
+      background-color: white;
+      color: black;
     }
 
     .side-nav img {
@@ -32,55 +50,38 @@
       display: block;
       margin: 0 auto 10px;
     }
-
-    .icon-label a,
-    .icon-label a:visited,
-    .icon-label a:hover,
-    .icon-label a:active {
-      text-decoration: none;
-      color: white;
-      font-size: 10px;
-      padding: 4px 8px;
-      display: inline-block;
-      transition: all 0.2s ease;
-    }
-
-    .icon-label a:active {
-      background-color: white;
-      color: black;
-    }
   </style>
 </head>
 <body>
+
   <nav class="side-nav">
     <div class="icon-block">
       <a href="smk-cv.html">
         <img src="ICON-PERSONAL.svg" alt="Personal Icon">
-        <div class="icon-label">PERSONAL</div>
+        PERSONAL
       </a>
     </div>
     <div class="icon-block">
       <a href="palabra.html">
         <img src="ICON-CODING-PROJECTS.svg" alt="Coding Projects Icon">
-        <div class="icon-label">CODING</div>
+        CODING
       </a>
     </div>
     <div class="icon-block">
       <a href="architecture.html">
         <img src="ICON-ARCHITECTURE.svg" alt="Architecture Icon">
-        <div class="icon-label">ARCHITECTURE</div>
+        ARCHITECTURE
       </a>
     </div>
     <div class="icon-block">
       <a href="call-mom.html">
         <img src="ICON-PAINTINGS.svg" alt="Paintings Icon">
-        <div class="icon-label">
-          RANDOM GAME NO ONE ASKED FOR.<br>
-          NO REASON — JUST NOSTALGIC FOR THE OLD PIXEL AESTHETIC IF YOU HADN'T NOTICED.<br>
-          PIXELS = JOY
-        </div>
+        RANDOM GAME NO ONE ASKED FOR.<br>
+        NO REASON — JUST NOSTALGIC FOR THE OLD PIXEL AESTHETIC IF YOU HADN'T NOTICED.<br>
+        PIXELS = JOY
       </a>
     </div>
   </nav>
+
 </body>
 </html>
