@@ -1,9 +1,9 @@
 .window {
   position: absolute;
-  top: 100px;
-  left: 100px;
-  width: 400px;
-  height: 500px;
+  top: 10%;
+  left: 30%;
+  width: 40%;
+  height: 60%;
   background: white;
   border: 4px solid black;
   box-shadow: 8px 8px 0 #333;
@@ -14,7 +14,9 @@
   z-index: 1000;
   font-family: 'Press Start 2P', monospace;
   text-transform: uppercase;
-  font-size: 10px;
+  font-size: 1vw; /* scales with screen size */
+  min-width: 300px;
+  min-height: 400px;
 }
 
 .window-header {
@@ -55,7 +57,7 @@
 }
 
 .personal-icon {
-  width: 150px;
+  width: 30%;
   height: auto;
   margin-bottom: 0;
 }
@@ -67,19 +69,19 @@
 }
 
 .contact-icon {
-  width: 75px;
+  width: 15%;
   height: auto;
 }
 
 .project-block {
-  margin-bottom: 80px;
+  margin-bottom: 10%;
 }
 
 .app-demo-gif {
-  width: 280px;
-  height: 500px;
+  width: 70%;
+  height: auto;
   object-fit: cover;
-  margin: 20px auto;
+  margin: 5% auto;
   display: block;
   border: 2px solid black;
 }
@@ -90,66 +92,8 @@
   word-break: break-word;
 }
 
-/* Responsive styling */
-@media (max-width: 768px) {
-  .side-nav {
-    position: fixed;
-    bottom: 0;
-    top: auto;
-    left: 0;
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    justify-content: space-around;
-    padding: 20px 0;
-    z-index: 999;
-  }
-
-  .icon-block {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .side-nav img {
-    height: 60px;
-    width: auto;
-    margin: 0 auto 5px;
-  }
-
-  .icon-label a {
-    font-size: 8px;
-  }
-
-  #sidebar-placeholder {
-    width: 100%;
-    height: auto;
-  }
-
-  .window {
-    left: 0 !important;
-    top: 0 !important;
-    width: 100vw;
-    height: calc(100vh - 100px);
-    max-width: none;
-  }
-
-  .app-demo-gif {
-    width: 100%;
-    height: auto;
-  }
-
-  .profile-header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .window-body h2 {
-    margin-top: 10px;
-  }
-  .window-body p {
-  line-height: 4;
+.window-body p {
+  line-height: 2.5;
   margin-bottom: 40px;
   color: #6e6e73;
-}
 }
