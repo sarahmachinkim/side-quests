@@ -6,12 +6,20 @@
   <link href="window.css" rel="stylesheet">
   <script src="window.js" defer=""></script>
   <style>
-    body {
-      background-color: white;
-      font-family: 'Press Start 2P', monospace;
-      margin: 0;
-      padding: 10;
-    }
+  body::before {
+  content: "";
+  position: fixed; 
+  top: 5%;
+  left: 15%;
+  width: 85vw;
+  height: 100vh;
+  background-image: url("ICON-BACKGROUND.jpg");
+  background-repeat: no-repeat;
+  background-size: 85vw auto;
+  opacity: 0.5; 
+  z-index: -1; 
+  pointer-events: none; 
+}
 
     .window {
       position: absolute;
