@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let offsetY = 0;
 
     const onMouseDown = (e) => {
+
+      if (e.target.closest('.close-btn')) return;
+
       isDragging = true;
       offsetX = e.clientX - windowEl.offsetLeft;
       offsetY = e.clientY - windowEl.offsetTop;
@@ -17,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const onMouseMove = (e) => {
       if (!isDragging) return;
-      windowEl.style.left = ${e.clientX - offsetX}px;
-      windowEl.style.top = ${e.clientY - offsetY}px;
+      windowEl.style.left = `${e.clientX - offsetX}px`;
+      windowEl.style.top = `${e.clientY - offsetY}px`;
     };
 
     const onMouseUp = () => {
@@ -29,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     header.addEventListener('mousedown', onMouseDown);
 
-    closeBtn.addEventListener('click', () => {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); 
       windowEl.style.display = 'none';
     });
   });
