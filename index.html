@@ -1,44 +1,216 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Side Quests</title>
-    <link rel="stylesheet" href="style.css">
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>SMK CV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+  <link href="window.css" rel="stylesheet">
+  <script src="window.js" defer=""></script>
+
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Press Start 2P', monospace;
+      margin: 0;
+      padding: 0;
+    }
+
+    #sidebar-placeholder {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 25%;
+      height: 100vh;
+      z-index: 10;
+    }
+
+    .window {
+      left: 17%;
+    }
+
+    .personal-icon {
+      width: 150px;
+      height: auto;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .contact-icons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-icon {
+      width: 75px;
+      height: auto;
+    }
+
+    .window-body h2 {
+      text-align: center;
+    }
+
+  .window-body p {
+  line-height: 2;
+  margin-bottom: 10px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>FORM.</h1>
-        <h1>FUNCTION.</h1>
-        <p>Personal projects, designed to make life better.</p>
 
-    </header>
+  <div id="sidebar-placeholder">
 
-    <main>
-        <section>
-            <div class="projects-container">
-                <a href="palabra.html" class="project-box" style="background-image: url('ChooseLanguagePage.png');">
-                    <div class="text-overlay">
-                        <h4>Palabra</h4>
-                        <p2>Learn 5 languages at once ></p2>
-                        <p2>United by Latin, designed for clarity.</p2>
-                    </div>
-                </a>
-                <a href="call-mom.html" class="project-box" style="background-image: url('callmom.png');">
-                    <div class="text-overlay">
-                        <h4>Call Mom</h4>
-                        <p2>Call at the perfect time ></p2>
-                        <p2>Seamless reminders, so time zones never keep you from family.</p2>
-                    </div>
-                </a>
-            </div>
-        </section>
-    </main>
 
-    <footer>
-        <a href="smk-cv.html">
-            <p>&copy; 2025 Sarah Machin Kim. Designed with intention.</p>
-        </a>
-    </footer>
-</body>
-</html>
+  <meta charset="UTF-8">
+  <title>Sidebar</title>
+  <style>
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .side-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 15%;
+      height: 200vh;
+      background-color: black;
+      padding: 40px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      z-index: 999;
+      font-family: 'Press Start 2P', monospace;
+    }
+
+    .icon-block {
+      text-align: center;
+    }
+
+    .side-nav a {
+      text-decoration: none;
+      color: white;
+      font-size: 1.2vw;
+      display: block;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .side-nav a:active {
+      background-color: white;
+      color: black;
+    }
+
+    .side-nav img {
+      height: auto;
+      width: 10vw;
+      display: block;
+      margin: 0 auto 10px;
+    }
+  
+  </style>
+
+
+
+  <nav class="side-nav">
+    <div class="icon-block">
+      <a href="smk-cv.html">
+        <img src="ICON-PERSONAL.svg" alt="Personal Icon">
+        PERSONAL
+      </a>
+    </div>
+    <div class="icon-block">
+      <a href="palabra.html">
+        <img src="ICON-CODING-PROJECTS.svg" alt="Coding Projects Icon">
+        CODING
+      </a>
+    </div>
+    <div class="icon-block">
+      <a href="architecture.html">
+        <img src="ICON-ARCHITECTURE.svg" alt="Architecture Icon">
+        ARCHITECTURE
+      </a>
+    </div>
+    <div class="icon-block">
+      <a href="call-mom.html">
+        <img src="ICON-PAINTINGS.svg" alt="Paintings Icon">
+        RANDOM GAME NO ONE ASKED FOR.<br>
+        NO REASON — JUST NOSTALGIC FOR THE OLD BITMAP AESTHETIC IF YOU HADN'T NOTICED.<br>
+        PIXELS = JOY
+      </a>
+    </div>
+  </nav>
+
+
+
+</div>
+
+<div class="window" style="top: 5%; left: 20%; right: 5%; height: 90vh; width: auto !important;">
+    <div class="window-header">
+      <span class="window-title">PERSONAL</span>
+      <div class="close-btn">X</div>
+    </div>
+    <div class="window-body">
+  <div class="profile-header">
+    <img src="ICON-PERSONAL.svg" alt="Personal Icon" class="personal-icon">
+    <div class="contact-icons">
+      <a href="mailto:sarahmachinkim@gmail.com">
+        <img src="ICON-EMAIL.svg" alt="Email" class="contact-icon">
+      </a>
+      <a href="https://www.linkedin.com/in/sarah-machin-kim/" target="_blank" rel="noopener noreferrer">
+        <img src="ICON-LINKEDIN.svg" alt="LinkedIn" class="contact-icon">
+      </a>
+    </div>
+  </div>
+
+  <h2>SARAH MACHIN KIM.</h2>
+
+  <p><strong>PRODUCT ENGINEER 2024–</strong><br>
+    <em>FOCUS &amp; OUTCOMES: Profitable hardware and firmware delivery, global expansion</em><br>
+    ■ Led 5-year hardware roadmap from vision to delivery<br>
+    ■ Defined product-market fit through customer trials + data analysis<br>
+    ■ Directed cross-functional teams across hardware + production<br>
+    ■ Increased productivity 11× and production yield by 20%<br>
+    ■ Launched in 3 new geographies and made the product profitable<br>
+    ■ GIRLS IN STEM MENTOR<br>
+    <strong>SKILLS:</strong>Product strategy, user research, sales analytics, competitive analysis, market sizing, opportunity evaluation, profit/loss modelling, production UX, technical project management, DFMEA, telemetry, LoRa (IoT)</p>
+
+  <p><strong>PRODUCT MANAGER 2020–2024</strong><br>
+    <em>FOCUS &amp; OUTCOMES: Core software and UX rebuild, Series A, market entry</em><br>
+    ■ Fully rebuilt the app — new codebase, new UX<br>
+    ■ Defined roadmap from usage data + interviews<br>
+    ■ Aligned firmware, hardware + software teams<br>
+    ■ Coordinated 20+ stakeholders to deliver product<br>
+    ■ Shared industry sustainability insights for construction sector at COP26 Glasgow<br>
+    ■ Presented to Stanley Black &amp; Decker to secure multimillion distribution deal<br>
+    ■ Drafted investor memos to secure $20M Series A raise<br>
+    <strong>SKILLS:</strong>Product discovery, stakeholder alignment, UX strategy, investor communication, roadmap planning, SQL, Metabase, Kibana, AWS, BLE, LoRa (IoT)</p>
+
+  <p><strong>ARCHITECT 2016–2019</strong><br>
+  ■ Design, general arrangement drawings, detailing, delivery<br>
+  <strong>SKILLS:</strong> Visual communication, systems thinking, CAD, spatial planning, regulatory coordination, cross-disciplinary collaboration, project delivery
+</p>
+
+</div>
+
+
+  </div>
+
+  <script>
+    fetch('sidebar.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('sidebar-placeholder').innerHTML = html;
+      });
+  </script>
+
+
+
+
+
+</body></html>
