@@ -5,7 +5,7 @@
   width: 60vw;
   height: 90%;
   background-color: white;
-  color: black;
+  color: white;
   border: 4px solid black;
   box-shadow: 8px 8px 0 #333;
   display: flex;
@@ -31,7 +31,6 @@
 }
 
 .close-btn {
-  all: unset;
   width: 16px;
   height: 16px;
   background-color: white;
@@ -40,7 +39,6 @@
   line-height: 16px;
   font-size: 12px;
   cursor: pointer;
-  display: inline-block;
 }
 
 .window-body {
@@ -48,6 +46,45 @@
   overflow-y: auto;
   padding: 10px;
   color: black;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.personal-icon {
+  width: 30%;
+  height: auto;
+  margin-bottom: 0;
+}
+
+.contact-icons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.contact-icon {
+  width: 15%;
+  height: auto;
+}
+
+.project-block {
+  margin-bottom: 10%;
+}
+
+.app-demo-gif {
+  width: 70%;
+  height: auto;
+  object-fit: cover;
+  margin: 5% auto;
+  display: block;
+  border: 2px solid black;
 }
 
 .window-body h2 {
@@ -61,37 +98,46 @@
   margin-bottom: 40px;
   color: #6e6e73;
 }
-
-.personal-icon {
-  width: 150px;
-  height: auto;
-  display: block;
-  margin: 20px auto;
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-/* === Mobile-Friendly Fixes === */
-@media (max-width: 768px) {
-  .window {
-    position: static;
-    width: 90vw;
-    height: auto;
-    margin: 20px auto;
-    box-shadow: none;
-    resize: none;
-    min-width: unset;
-    min-height: unset;
-  }
+this is my window.js
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.window').forEach(windowEl => {
+    const header = windowEl.querySelector('.window-header');
+    const closeBtn = windowEl.querySelector('.close-btn');
 
-  .window-header {
-    cursor: default;
-  }
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
 
-  .window-body {
-    overflow: visible;
-    padding: 15px;
-  }
+    const onMouseDown = (e) => {
+      isDragging = true;
+      offsetX = e.clientX - windowEl.offsetLeft;
+      offsetY = e.clientY - windowEl.offsetTop;
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    };
 
-  .personal-icon {
-    width: 80%;
-  }
-}
+    const onMouseMove = (e) => {
+      if (!isDragging) return;
+      windowEl.style.left = ${e.clientX - offsetX}px;
+      windowEl.style.top = ${e.clientY - offsetY}px;
+    };
+
+    const onMouseUp = () => {
+      isDragging = false;
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    header.addEventListener('mousedown', onMouseDown);
+
+    closeBtn.addEventListener('click', () => {
+      windowEl.style.display = 'none';
+    });
+  });
+});
