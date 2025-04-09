@@ -106,3 +106,32 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+@media (max-width: 768px) {
+  .window {
+    position: static;
+    width: 70vw;
+    margin: 20px auto;
+    height: auto;
+    box-shadow: none;
+    border-width: 2px;
+    resize: none;
+    min-width: unset;
+    min-height: unset;
+    z-index: auto;
+  }
+
+  .window-header {
+    cursor: default;
+  }
+
+  .window-body {
+    overflow: visible;
+    padding: 20px;
+  }
+
+  .personal-icon,
+  .app-demo-gif {
+    width: 100%;
+  }
+}
