@@ -1,3 +1,4 @@
+//X fix -sk
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.window').forEach(windowEl => {
     const header = windowEl.querySelector('.window-header');
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let offsetY = 0;
 
     const onMouseDown = (e) => {
-
+     
       if (e.target.closest('.close-btn')) return;
 
       isDragging = true;
