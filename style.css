@@ -7,12 +7,9 @@
 
 body {
     background-color: #ded5ed;
-    color: rgb(0, 0, 0);
+    color: rgb(0,0,0);
     text-align: left;
-    background-image: url("ICON-BACKGROUND.jpg");
-    background-repeat: no-repeat;
-    background-size: 200vw auto;
-    background-position: center top;
+}
 
 header {
     padding: 80px 20px;
