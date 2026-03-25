@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#111111" />
   <title>Split the bill</title>
-  <link rel="stylesheet" href="styles-bill.css?v=1">
+  <link rel="stylesheet" href="styles-bill.css?v=8">
 </head>
 <body>
   <div class="app">
@@ -15,24 +15,14 @@
     <div class="section">
       <div class="section-title">Split</div>
 
-      <div class="people-row" id="peopleRow"></div>
-
-      <div class="people-row" style="margin-top:8px;">
+      <div class="split-top">
+        <div class="people-row" id="peopleRow"></div>
         <div class="add-person" id="addPersonBtn">+</div>
       </div>
 
       <div class="summary-top">
         <strong>Total</strong>
         <div class="total-amount" id="grandTotal">£0.00</div>
-      </div>
-
-      <div class="tip-row">
-        <div>Tip %</div>
-        <input class="tip-input" id="tipInput" type="number" value="12.5">
-      </div>
-
-      <div class="sub-line" id="subLine">
-        Subtotal £0.00 · Tip £0.00
       </div>
     </div>
 
@@ -50,9 +40,11 @@
       {name:"Chips",price:6,assigned:["A","B"]},
       {name:"Wine",price:18,assigned:["B","C"]}
     ];
-    let tip = 12.5;
+    let tipPercent = 12.5;
 
-    function money(n){return "£"+(Number(n)||0).toFixed(2)}
+    function money(n){
+      return "£" + (Number(n) || 0).toFixed(2);
+    }
 
     function nextLetter(){
       return String.fromCharCode(65 + people.length);
@@ -61,127 +53,169 @@
     function totals(){
       let subtotal = 0;
       let map = {};
-      people.forEach(p=>map[p]=0);
+      people.forEach(p => map[p] = 0);
 
-      items.forEach(i=>{
-        let price = Number(i.price)||0;
+      items.forEach(i => {
+        let price = Number(i.price) || 0;
         subtotal += price;
-        if(!i.assigned.length) return;
+        if (!i.assigned.length) return;
 
         let share = price / i.assigned.length;
-        i.assigned.forEach(p=>map[p]+=share);
+        i.assigned.forEach(p => map[p] += share);
       });
 
-      let tipAmount = subtotal * (tip/100);
+      let tipAmount = subtotal * (tipPercent / 100);
       let final = {};
 
-      people.forEach(p=>{
-        let ratio = subtotal ? map[p]/subtotal : 0;
-        final[p] = map[p] + ratio*tipAmount;
+      people.forEach(p => {
+        let evenTipShare = people.length ? tipAmount / people.length : 0;
+        final[p] = map[p] + evenTipShare;
       });
 
-      return { subtotal, tipAmount, grand: subtotal + tipAmount, final };
+      return {
+        subtotal,
+        tipAmount,
+        grand: subtotal + tipAmount,
+        final
+      };
     }
 
-function renderPeople(){
-  let row = document.getElementById("peopleRow");
-  row.innerHTML = "";
-  let t = totals();
+    function renderPeople(){
+      const row = document.getElementById("peopleRow");
+      row.innerHTML = "";
+      const t = totals();
 
-  people.forEach(p=>{
-    const amount = t.final[p] || 0;
-    const fraction = t.grand ? amount / t.grand : 1 / people.length;
-    const flexGrow = Math.max(1, fraction * 10);
+      people.forEach(p => {
+        const amount = t.final[p] || 0;
+        const fraction = t.grand ? amount / t.grand : 1 / people.length;
+        const flexGrow = Math.max(1, fraction * 10);
 
-    let el = document.createElement("div");
-    el.className = "person-pill";
-    el.style.flex = `${flexGrow} 1 0`;
-
-    el.innerHTML = `
-      <div class="person-label">${p}</div>
-      <div class="person-amount">${money(amount)}</div>
-    `;
-
-    row.appendChild(el);
-  });
-}
+        const el = document.createElement("div");
+        el.className = "person-pill";
+        el.style.flex = `${flexGrow} 1 0`;
+        el.innerHTML = `
+          <div class="person-label">${p}</div>
+          <div class="person-amount">${money(amount)}</div>
+        `;
+        row.appendChild(el);
+      });
+    }
 
     function renderItems(){
-  let c = document.getElementById("itemsContainer");
-  c.innerHTML = "";
+      const c = document.getElementById("itemsContainer");
+      c.innerHTML = "";
 
-  items.forEach((item,i)=>{
-    let row = document.createElement("div");
-    row.className = "item-row";
+      items.forEach((item, i) => {
+        const row = document.createElement("div");
+        row.className = "item-row";
 
-    let top = document.createElement("div");
-    top.className = "item-top";
+        const top = document.createElement("div");
+        top.className = "item-top";
 
-    let name = document.createElement("input");
-    name.className = "item-name";
-    name.value = item.name;
-    name.oninput = e => { item.name = e.target.value; render(); };
+        const name = document.createElement("input");
+        name.className = "item-name";
+        name.value = item.name;
+        name.oninput = e => {
+          item.name = e.target.value;
+          render();
+        };
 
-    let price = document.createElement("input");
-    price.className = "item-price";
-    price.type = "number";
-    price.value = item.price;
-    price.oninput = e => { item.price = Number(e.target.value); render(); };
+        const price = document.createElement("input");
+        price.className = "item-price";
+        price.type = "number";
+        price.value = item.price;
+        price.oninput = e => {
+          item.price = Number(e.target.value);
+          render();
+        };
 
-    let del = document.createElement("button");
-    del.className = "delete-item";
-    del.textContent = "×";
-    del.onclick = ()=>{ items.splice(i,1); render(); };
+        const del = document.createElement("button");
+        del.className = "delete-item";
+        del.textContent = "×";
+        del.onclick = () => {
+          items.splice(i, 1);
+          render();
+        };
 
-    top.append(name, price, del);
+        top.append(name, price, del);
 
-    let chips = document.createElement("div");
-    chips.className = "chips-inline";
+        const chips = document.createElement("div");
+        chips.className = "chips-inline";
 
-    people.forEach(p=>{
-      let chip = document.createElement("div");
-      chip.className = "chip" + (item.assigned.includes(p) ? " selected" : "");
-      chip.textContent = p;
-      chip.onclick = ()=>{
-        item.assigned = item.assigned.includes(p)
-          ? item.assigned.filter(x=>x!==p)
-          : [...item.assigned,p];
+        people.forEach(p => {
+          const chip = document.createElement("div");
+          chip.className = "chip" + (item.assigned.includes(p) ? " selected" : "");
+          chip.textContent = p;
+          chip.onclick = () => {
+            item.assigned = item.assigned.includes(p)
+              ? item.assigned.filter(x => x !== p)
+              : [...item.assigned, p];
+            render();
+          };
+          chips.appendChild(chip);
+        });
+
+        row.append(top, chips);
+        c.appendChild(row);
+      });
+
+      const tipRow = document.createElement("div");
+      tipRow.className = "item-row tip-row-item";
+
+      const tipTop = document.createElement("div");
+      tipTop.className = "item-top";
+
+      const tipName = document.createElement("div");
+      tipName.className = "item-name tip-display";
+      tipName.textContent = `${money(totals().tipAmount)} Tip`;
+
+      const tipPct = document.createElement("input");
+      tipPct.className = "item-price tip-percent-input";
+      tipPct.type = "number";
+      tipPct.value = tipPercent;
+      tipPct.oninput = e => {
+        tipPercent = Number(e.target.value);
         render();
       };
-      chips.appendChild(chip);
-    });
 
-    row.append(top, chips);
-    c.appendChild(row);
-  });
-}
+      const tipLock = document.createElement("div");
+      tipLock.className = "delete-item tip-lock";
+      tipLock.textContent = "—";
+
+      tipTop.append(tipName, tipPct, tipLock);
+
+      const tipChips = document.createElement("div");
+      tipChips.className = "chips-inline";
+
+      people.forEach(p => {
+        const chip = document.createElement("div");
+        chip.className = "chip chip-muted selected";
+        chip.textContent = p;
+        tipChips.appendChild(chip);
+      });
+
+      tipRow.append(tipTop, tipChips);
+      c.appendChild(tipRow);
+    }
 
     function renderSummary(){
-      let t = totals();
+      const t = totals();
       document.getElementById("grandTotal").textContent = money(t.grand);
-      document.getElementById("subLine").textContent =
-        `Subtotal ${money(t.subtotal)} · Tip ${money(t.tipAmount)}`;
     }
 
     function render(){
       renderPeople();
       renderItems();
       renderSummary();
-      document.getElementById("tipInput").value = tip;
     }
 
-    document.getElementById("addPersonBtn").onclick = ()=>{
+    document.getElementById("addPersonBtn").onclick = () => {
       people.push(nextLetter());
       render();
     };
 
-    document.getElementById("addItemBtn").onclick = ()=>{
+    document.getElementById("addItemBtn").onclick = () => {
       items.push({name:"New item",price:0,assigned:[]});
-      render();
-    };
-
-    document.getElementById("tipInput").oninput = e=>{
-      tip = Number(e.target.value);
       render();
     };
 
