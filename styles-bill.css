@@ -28,6 +28,7 @@ html, body {
 h1 {
   margin: 0 0 4px;
   font-size: 28px;
+  line-height: 1.1;
 }
 
 .sub {
@@ -104,6 +105,8 @@ h1 {
   border-radius: 10px;
   padding: 0 10px;
   font-size: 15px;
+  background: #fff;
+  color: var(--text);
 }
 
 .chips-inline {
@@ -121,6 +124,8 @@ h1 {
   justify-content: center;
   font-weight: bold;
   cursor: pointer;
+  background: #fff;
+  color: #111;
 }
 
 .chip.selected {
@@ -162,6 +167,7 @@ h1 {
   display: flex;
   gap: 8px;
   margin: 8px 0;
+  align-items: center;
 }
 
 .tip-input {
