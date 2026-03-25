@@ -5,25 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#111111" />
   <title>Split the bill</title>
-  <link rel="stylesheet" href="styles-bill.css?v=8">
+  <link rel="stylesheet" href="styles-bill.css?v=9">
 </head>
 <body>
   <div class="app">
-    <h1>Split the bill</h1>
-    <p class="sub">Tap letters to assign items</p>
+    <div class="page-title">Split the bill</div>
+    <div class="page-subtitle">Tap letters to assign items</div>
 
-    <div class="section">
-      <div class="section-title">Split</div>
-
-      <div class="split-top">
-        <div class="people-row" id="peopleRow"></div>
-        <div class="add-person" id="addPersonBtn">+</div>
+    <div class="top-panel">
+      <div class="people-summary-wrap">
+        <div class="people-summary" id="peopleRow"></div>
       </div>
 
-      <div class="summary-top">
-        <strong>Total</strong>
-        <div class="total-amount" id="grandTotal">£0.00</div>
-      </div>
+      <div class="total-line" id="grandTotalLine">Total = £0.00</div>
+
+      <button class="add-people-button" id="addPersonBtn" type="button">
+        + Add People
+      </button>
     </div>
 
     <div class="section">
@@ -34,23 +32,23 @@
   </div>
 
   <script>
-    let people = ["A","B","C"];
+    let people = ["A", "B", "C"];
     let items = [
-      {name:"Burger",price:12,assigned:["A"]},
-      {name:"Chips",price:6,assigned:["A","B"]},
-      {name:"Wine",price:18,assigned:["B","C"]}
+      { name: "Burger", price: 12, assigned: ["A"] },
+      { name: "Chips", price: 6, assigned: ["A", "B"] },
+      { name: "Wine", price: 18, assigned: ["B", "C"] }
     ];
-    let tipPercent = 12.5;
+    let tipPercent = 10;
 
-    function money(n){
+    function money(n) {
       return "£" + (Number(n) || 0).toFixed(2);
     }
 
-    function nextLetter(){
+    function nextLetter() {
       return String.fromCharCode(65 + people.length);
     }
 
-    function totals(){
+    function totals() {
       let subtotal = 0;
       let map = {};
       people.forEach(p => map[p] = 0);
@@ -58,6 +56,7 @@
       items.forEach(i => {
         let price = Number(i.price) || 0;
         subtotal += price;
+
         if (!i.assigned.length) return;
 
         let share = price / i.assigned.length;
@@ -80,90 +79,90 @@
       };
     }
 
-    function renderPeople(){
+    function renderPeople() {
       const row = document.getElementById("peopleRow");
       row.innerHTML = "";
       const t = totals();
 
       people.forEach(p => {
         const amount = t.final[p] || 0;
-        const fraction = t.grand ? amount / t.grand : 1 / people.length;
+        const fraction = t.grand ? amount / t.grand : 1 / Math.max(people.length, 1);
         const flexGrow = Math.max(1, fraction * 10);
 
-        const el = document.createElement("div");
-        el.className = "person-pill";
-        el.style.flex = `${flexGrow} 1 0`;
-        el.innerHTML = `
-          <div class="person-label">${p}</div>
-          <div class="person-amount">${money(amount)}</div>
+        const card = document.createElement("div");
+        card.className = "person-summary-card";
+        card.style.flex = `${flexGrow} 1 0`;
+
+        card.innerHTML = `
+          <div class="person-bar"></div>
+          <div class="person-code">${p}</div>
+          <div class="person-value">${amount.toFixed(2)}</div>
         `;
-        row.appendChild(el);
+
+        row.appendChild(card);
       });
     }
 
-    function renderItems(){
-      const c = document.getElementById("itemsContainer");
-      c.innerHTML = "";
+    function buildItemRow(item, i) {
+      const row = document.createElement("div");
+      row.className = "item-row";
 
-      items.forEach((item, i) => {
-        const row = document.createElement("div");
-        row.className = "item-row";
+      const top = document.createElement("div");
+      top.className = "item-top";
 
-        const top = document.createElement("div");
-        top.className = "item-top";
+      const name = document.createElement("input");
+      name.className = "item-name";
+      name.value = item.name;
+      name.oninput = e => {
+        item.name = e.target.value;
+        render();
+      };
 
-        const name = document.createElement("input");
-        name.className = "item-name";
-        name.value = item.name;
-        name.oninput = e => {
-          item.name = e.target.value;
+      const price = document.createElement("input");
+      price.className = "item-price";
+      price.type = "number";
+      price.value = item.price;
+      price.oninput = e => {
+        item.price = Number(e.target.value);
+        render();
+      };
+
+      const del = document.createElement("button");
+      del.className = "delete-item";
+      del.textContent = "×";
+      del.onclick = () => {
+        items.splice(i, 1);
+        render();
+      };
+
+      top.append(name, price, del);
+
+      const chips = document.createElement("div");
+      chips.className = "chips-inline";
+
+      people.forEach(p => {
+        const chip = document.createElement("div");
+        chip.className = "chip" + (item.assigned.includes(p) ? " selected" : "");
+        chip.textContent = p;
+        chip.onclick = () => {
+          item.assigned = item.assigned.includes(p)
+            ? item.assigned.filter(x => x !== p)
+            : [...item.assigned, p];
           render();
         };
-
-        const price = document.createElement("input");
-        price.className = "item-price";
-        price.type = "number";
-        price.value = item.price;
-        price.oninput = e => {
-          item.price = Number(e.target.value);
-          render();
-        };
-
-        const del = document.createElement("button");
-        del.className = "delete-item";
-        del.textContent = "×";
-        del.onclick = () => {
-          items.splice(i, 1);
-          render();
-        };
-
-        top.append(name, price, del);
-
-        const chips = document.createElement("div");
-        chips.className = "chips-inline";
-
-        people.forEach(p => {
-          const chip = document.createElement("div");
-          chip.className = "chip" + (item.assigned.includes(p) ? " selected" : "");
-          chip.textContent = p;
-          chip.onclick = () => {
-            item.assigned = item.assigned.includes(p)
-              ? item.assigned.filter(x => x !== p)
-              : [...item.assigned, p];
-            render();
-          };
-          chips.appendChild(chip);
-        });
-
-        row.append(top, chips);
-        c.appendChild(row);
+        chips.appendChild(chip);
       });
 
-      const tipRow = document.createElement("div");
-      tipRow.className = "item-row tip-row-item";
+      row.append(top, chips);
+      return row;
+    }
 
-      const tipTop = document.createElement("div");
-      tipTop.className = "item-top";
+    function buildTipRow() {
+      const row = document.createElement("div");
+      row.className = "item-row tip-row-item";
+
+      const top = document.createElement("div");
+      top.className = "item-top";
 
       const tipName = document.createElement("div");
       tipName.className = "item-name tip-display";
@@ -178,32 +177,43 @@
         render();
       };
 
-      const tipLock = document.createElement("div");
-      tipLock.className = "delete-item tip-lock";
-      tipLock.textContent = "—";
+      const lock = document.createElement("div");
+      lock.className = "delete-item tip-lock";
+      lock.textContent = "—";
 
-      tipTop.append(tipName, tipPct, tipLock);
+      top.append(tipName, tipPct, lock);
 
-      const tipChips = document.createElement("div");
-      tipChips.className = "chips-inline";
+      const chips = document.createElement("div");
+      chips.className = "chips-inline";
 
       people.forEach(p => {
         const chip = document.createElement("div");
         chip.className = "chip chip-muted selected";
         chip.textContent = p;
-        tipChips.appendChild(chip);
+        chips.appendChild(chip);
       });
 
-      tipRow.append(tipTop, tipChips);
-      c.appendChild(tipRow);
+      row.append(top, chips);
+      return row;
     }
 
-    function renderSummary(){
+    function renderItems() {
+      const c = document.getElementById("itemsContainer");
+      c.innerHTML = "";
+
+      items.forEach((item, i) => {
+        c.appendChild(buildItemRow(item, i));
+      });
+
+      c.appendChild(buildTipRow());
+    }
+
+    function renderSummary() {
       const t = totals();
-      document.getElementById("grandTotal").textContent = money(t.grand);
+      document.getElementById("grandTotalLine").textContent = `Total = ${money(t.grand)}`;
     }
 
-    function render(){
+    function render() {
       renderPeople();
       renderItems();
       renderSummary();
@@ -215,7 +225,7 @@
     };
 
     document.getElementById("addItemBtn").onclick = () => {
-      items.push({name:"New item",price:0,assigned:[]});
+      items.push({ name: "New item", price: 0, assigned: [] });
       render();
     };
 
