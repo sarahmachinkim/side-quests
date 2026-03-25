@@ -1,1 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#111111" />
+  <title>Split the bill</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
+    :root {
+      --bg: #f5f5f3;
+      --card: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --line: #d9d9d9;
+      --soft: #ececec;
+      --chip: #ffffff;
+      --chip-on: #111111;
+      --chip-on-text: #ffffff;
+      --bar: #d9d9d9;
+      --radius: 18px;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.1;
+    }
+
+    .sub {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    }
+
+    .people-row,
+    .chips-row,
+    .bars {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .person-pill,
+    .add-person {
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      font-size: 15px;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .add-person {
+      border-style: dashed;
+      cursor: pointer;
+    }
+
+    .item-card {
+      background: #fff;
+      border: 1px solid var(--soft);
+      border-radius: 18px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .item-top {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .item-name,
+    .item-price,
+    .tip-input {
+      min-height: 44px;
+      border: 1px solid #cfcfcf;
+      border-radius: 12px;
+      padding: 0 12px;
+      font-size: 16px;
+      background: #fff;
+      color: var(--text);
+    }
+
+    .item-name {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .item-price {
+      width: 96px;
+    }
+
+    .chip {
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      border: 1px solid var(--text);
+      background: var(--chip);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.06s ease, background 0.12s ease, color 0.12s ease;
+    }
+
+    .chip:active,
+    .add-person:active,
+    .add-item:active,
+    .delete-item:active {
+      transform: scale(0.97);
+    }
+
+    .chip.selected {
+      background: var(--chip-on);
+      color: var(--chip-on-text);
+    }
+
+    .item-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+
+    .delete-item {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 10px;
+      min-height: 36px;
+      padding: 0 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .add-item {
+      width: 100%;
+      min-height: 46px;
+      border-radius: 14px;
+      border: 1px dashed #bcbcbc;
+      background: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .summary-card {
+      margin-top: 14px;
+    }
+
+    .summary-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .total-amount {
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .tip-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .tip-label {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .tip-input {
+      width: 82px;
+    }
+
+    .sub-line {
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .bars {
+      display: flex;
+      gap: 6px;
+      align-items: stretch;
+      flex-wrap: nowrap;
+    }
+
+    .bar {
+      min-width: 72px;
+      background: var(--bar);
+      border-radius: 10px;
+      padding: 10px 6px;
+      text-align: center;
+      overflow: hidden;
+      transition: flex 0.25s ease;
+    }
+
+    .bar-letter {
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .bar-amount {
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .bar-items {
+      margin-top: 4px;
+      font-size: 11px;
+      color: #333;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @media (max-width: 360px) {
+      .chip {
+        width: 48px;
+        height: 48px;
+        font-size: 17px;
+      }
+
+      .item-price {
+        width: 84px;
+      }
+
+      .bar-amount {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>Split the bill</h1>
+    <p class="sub">Tap letters to assign items. Totals update instantly.</p>
+
+    <div class="card">
+      <div class="section-title">People</div>
+      <div class="people-row" id="peopleRow"></div>
+      <div class="people-row" style="margin-top:10px;">
+        <div class="add-person" id="addPersonBtn">+ Add</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Items</div>
+      <div id="itemsContainer"></div>
+      <button class="add-item" id="addItemBtn" type="button">+ Add item</button>
+    </div>
+
+    <div class="card summary-card">
+      <div class="summary-top">
+        <strong>Total</strong>
+        <div class="total-amount" id="grandTotal">£0.00</div>
+      </div>
+
+      <div class="tip-row">
+        <div class="tip-label">Tip %</div>
+        <input class="tip-input" id="tipInput" type="number" step="0.1" value="12.5" />
+      </div>
+
+      <div class="sub-line" id="subLine">Subtotal £0.00 · Tip £0.00</div>
+
+      <div class="bars" id="bars"></div>
+    </div>
+  </div>
+
+  <script>
+    let people = ["A", "B", "C"];
+    let items = [
+      { name: "Burger", price: 12, assigned: ["A"] },
+      { name: "Chips", price: 6, assigned: ["A", "B"] },
+      { name: "Wine", price: 18, assigned: ["B", "C"] }
+    ];
+    let tip = 12.5;
+
+    function money(n) {
+      return "£" + (Number(n) || 0).toFixed(2);
+    }
+
+    function nextLetter() {
+      return String.fromCharCode(65 + people.length);
+    }
+
+    function calculateTotals() {
+      const subtotals = {};
+      const itemMap = {};
+      people.forEach(p => {
+        subtotals[p] = 0;
+        itemMap[p] = [];
+      });
+
+      let subtotal = 0;
+
+      items.forEach(item => {
+        const price = Number(item.price) || 0;
+        subtotal += price;
+
+        if (!item.assigned.length) return;
+
+        const share = price / item.assigned.length;
+
+        item.assigned.forEach(person => {
+          subtotals[person] += share;
+          itemMap[person].push(item.name || "Item");
+        });
+      });
+
+      const tipAmount = subtotal * ((Number(tip) || 0) / 100);
+      const final = {};
+
+      people.forEach(person => {
+        const ratio = subtotal > 0 ? subtotals[person] / subtotal : 0;
+        final[person] = subtotals[person] + ratio * tipAmount;
+      });
+
+      return {
+        subtotal,
+        tipAmount,
+        grandTotal: subtotal + tipAmount,
+        final,
+        itemMap
+      };
+    }
+
+    function toggleAssignment(itemIndex, person) {
+      const assigned = items[itemIndex].assigned;
+      if (assigned.includes(person)) {
+        items[itemIndex].assigned = assigned.filter(x => x !== person);
+      } else {
+        items[itemIndex].assigned = [...assigned, person];
+      }
+      render();
+    }
+
+    function addPerson() {
+      people.push(nextLetter());
+      render();
+    }
+
+    function addItem() {
+      items.push({
+        name: "New item",
+        price: 0,
+        assigned: []
+      });
+      render();
+    }
+
+    function deleteItem(index) {
+      items.splice(index, 1);
+      render();
+    }
+
+    function renderPeople() {
+      const peopleRow = document.getElementById("peopleRow");
+      peopleRow.innerHTML = "";
+
+      people.forEach(person => {
+        const pill = document.createElement("div");
+        pill.className = "person-pill";
+        pill.textContent = person;
+        peopleRow.appendChild(pill);
+      });
+    }
+
+    function renderItems() {
+      const container = document.getElementById("itemsContainer");
+      container.innerHTML = "";
+
+      items.forEach((item, index) => {
+        const itemCard = document.createElement("div");
+        itemCard.className = "item-card";
+
+        const top = document.createElement("div");
+        top.className = "item-top";
+
+        const nameInput = document.createElement("input");
+        nameInput.className = "item-name";
+        nameInput.type = "text";
+        nameInput.value = item.name;
+        nameInput.placeholder = "Item name";
+        nameInput.addEventListener("input", (e) => {
+          items[index].name = e.target.value;
+          renderSummaryOnly();
+        });
+
+        const priceInput = document.createElement("input");
+        priceInput.className = "item-price";
+        priceInput.type = "number";
+        priceInput.step = "0.01";
+        priceInput.value = item.price;
+        priceInput.placeholder = "0";
+        priceInput.addEventListener("input", (e) => {
+          items[index].price = Number(e.target.value);
+          renderSummaryOnly();
+        });
+
+        top.appendChild(nameInput);
+        top.appendChild(priceInput);
+
+        const chipsRow = document.createElement("div");
+        chipsRow.className = "chips-row";
+
+        people.forEach(person => {
+          const chip = document.createElement("div");
+          chip.className = "chip" + (item.assigned.includes(person) ? " selected" : "");
+          chip.textContent = person;
+          chip.addEventListener("click", () => toggleAssignment(index, person));
+          chipsRow.appendChild(chip);
+        });
+
+        const actions = document.createElement("div");
+        actions.className = "item-actions";
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.className = "delete-item";
+        deleteBtn.type = "button";
+        deleteBtn.textContent = "Delete";
+        deleteBtn.addEventListener("click", () => deleteItem(index));
+
+        actions.appendChild(deleteBtn);
+
+        itemCard.appendChild(top);
+        itemCard.appendChild(chipsRow);
+        itemCard.appendChild(actions);
+
+        container.appendChild(itemCard);
+      });
+    }
+
+    function renderSummaryOnly() {
+      const totals = calculateTotals();
+
+      document.getElementById("grandTotal").textContent = money(totals.grandTotal);
+      document.getElementById("subLine").textContent =
+        `Subtotal ${money(totals.subtotal)} · Tip ${money(totals.tipAmount)}`;
+
+      const bars = document.getElementById("bars");
+      bars.innerHTML = "";
+
+      people.forEach(person => {
+        const amount = totals.final[person] || 0;
+        const fraction = totals.grandTotal > 0 ? amount / totals.grandTotal : 1 / Math.max(people.length, 1);
+        const flexGrow = Math.max(1, fraction * 10);
+
+        const bar = document.createElement("div");
+        bar.className = "bar";
+        bar.style.flex = `${flexGrow} 1 0`;
+
+        const letter = document.createElement("div");
+        letter.className = "bar-letter";
+        letter.textContent = person;
+
+        const amountEl = document.createElement("div");
+        amountEl.className = "bar-amount";
+        amountEl.textContent = money(amount);
+
+        const itemsEl = document.createElement("div");
+        itemsEl.className = "bar-items";
+        itemsEl.textContent = totals.itemMap[person].length
+          ? totals.itemMap[person].join(", ")
+          : "No items";
+
+        bar.appendChild(letter);
+        bar.appendChild(amountEl);
+        bar.appendChild(itemsEl);
+        bars.appendChild(bar);
+      });
+    }
+
+    function render() {
+      renderPeople();
+      renderItems();
+      renderSummaryOnly();
+      document.getElementById("tipInput").value = tip;
+    }
+
+    document.getElementById("addPersonBtn").addEventListener("click", addPerson);
+    document.getElementById("addItemBtn").addEventListener("click", addItem);
+    document.getElementById("tipInput").addEventListener("input", (e) => {
+      tip = Number(e.target.value);
+      renderSummaryOnly();
+    });
+
+    render();
+  </script>
+</body>
+</html>
