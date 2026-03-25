@@ -58,7 +58,7 @@ html, body {
 
 .people-summary {
   display: flex;
-  gap: 8px;
+  gap: 0;
   align-items: flex-start;
   width: 100%;
   overflow: hidden;
@@ -72,6 +72,11 @@ html, body {
   justify-content: flex-start;
   text-align: center;
   overflow: hidden;
+  padding-right: 8px;
+}
+
+.person-summary-card:last-child {
+  padding-right: 0;
 }
 
 .person-bar {
