@@ -48,36 +48,41 @@
       return String.fromCharCode(65 + people.length);
     }
 
-    function totals() {
-      let subtotal = 0;
-      let map = {};
-      people.forEach(p => map[p] = 0);
+   function totals() {
+  let subtotal = 0;
+  let assignedSubtotal = 0;
+  let map = {};
+  people.forEach(p => map[p] = 0);
 
-      items.forEach(i => {
-        let price = Number(i.price) || 0;
-        subtotal += price;
+  items.forEach(i => {
+    let price = Number(i.price) || 0;
+    subtotal += price;
 
-        if (!i.assigned.length) return;
+    if (!i.assigned.length) return;
 
-        let share = price / i.assigned.length;
-        i.assigned.forEach(p => map[p] += share);
-      });
+    assignedSubtotal += price;
 
-      let tipAmount = subtotal * (tipPercent / 100);
-      let final = {};
+    let share = price / i.assigned.length;
+    i.assigned.forEach(p => map[p] += share);
+  });
 
-      people.forEach(p => {
-        let evenTipShare = people.length ? tipAmount / people.length : 0;
-        final[p] = map[p] + evenTipShare;
-      });
+  let tipAmount = subtotal * (tipPercent / 100);
+  let evenTipShare = people.length ? tipAmount / people.length : 0;
+  let final = {};
 
-      return {
-        subtotal,
-        tipAmount,
-        grand: subtotal + tipAmount,
-        final
-      };
-    }
+  people.forEach(p => {
+    final[p] = map[p] + evenTipShare;
+  });
+
+  return {
+    subtotal,
+    assignedSubtotal,
+    unassignedSubtotal: subtotal - assignedSubtotal,
+    tipAmount,
+    grand: subtotal + tipAmount,
+    final
+  };
+}
 
 function renderPeople() {
   const row = document.getElementById("peopleRow");
@@ -86,10 +91,10 @@ function renderPeople() {
 
   people.forEach(p => {
     const amount = t.final[p] || 0;
-    const fraction = t.grand ? amount / t.grand : 1 / Math.max(people.length, 1);
 
-    // Give every person a visible minimum, then add proportional width
-    const widthPercent = Math.max(12, fraction * 100);
+    // Width is based on full grand total, not just the claimed share
+    const fractionOfWhole = t.grand ? amount / t.grand : 0;
+    const widthPercent = fractionOfWhole * 100;
 
     const card = document.createElement("div");
     card.className = "person-summary-card";
@@ -103,6 +108,17 @@ function renderPeople() {
 
     row.appendChild(card);
   });
+
+  // Show the unallocated part as empty remainder
+  const unallocated = document.createElement("div");
+  unallocated.className = "person-summary-remainder";
+
+  const unallocatedFraction = t.grand
+    ? Math.max(0, (t.unassignedSubtotal / t.grand) * 100)
+    : 0;
+
+  unallocated.style.flex = `0 0 ${unallocatedFraction}%`;
+  row.appendChild(unallocated);
 }
 
     function buildItemRow(item, i) {
