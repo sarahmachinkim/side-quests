@@ -79,29 +79,29 @@
       };
     }
 
-    function renderPeople() {
-      const row = document.getElementById("peopleRow");
-      row.innerHTML = "";
-      const t = totals();
+function renderPeople() {
+  const row = document.getElementById("peopleRow");
+  row.innerHTML = "";
+  const t = totals();
 
-      people.forEach(p => {
-        const amount = t.final[p] || 0;
-        const fraction = t.grand ? amount / t.grand : 1 / Math.max(people.length, 1);
-        const flexGrow = Math.max(1, fraction * 10);
+  people.forEach(p => {
+    const amount = t.final[p] || 0;
+    const fraction = t.grand ? amount / t.grand : 1 / Math.max(people.length, 1);
+    const flexGrow = Math.max(1, fraction * 12);
 
-        const card = document.createElement("div");
-        card.className = "person-summary-card";
-        card.style.flex = `${flexGrow} 1 0`;
+    const card = document.createElement("div");
+    card.className = "person-summary-card";
+    card.style.flex = `${flexGrow} 1 0`;
 
-        card.innerHTML = `
-          <div class="person-bar"></div>
-          <div class="person-code">${p}</div>
-          <div class="person-value">${amount.toFixed(2)}</div>
-        `;
+    card.innerHTML = `
+      <div class="person-bar"></div>
+      <div class="person-code">${p}</div>
+      <div class="person-value">${amount.toFixed(2)}</div>
+    `;
 
-        row.appendChild(card);
-      });
-    }
+    row.appendChild(card);
+  });
+}
 
     function buildItemRow(item, i) {
       const row = document.createElement("div");
