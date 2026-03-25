@@ -2,18 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#111111" />
   <title>Split the bill</title>
-
-  <link rel="stylesheet" href="styles-bill.css">
+  <link rel="stylesheet" href="styles-bill.css?v=1">
 </head>
-
 <body>
   <div class="app">
     <h1>Split the bill</h1>
-    <p class="sub">Tap letters to assign items</p>
+    <p class="sub">Tap letters to assign items.</p>
 
-    <!-- TOP -->
     <div class="section">
       <div class="section-title">Split</div>
 
@@ -38,11 +36,10 @@
       </div>
     </div>
 
-    <!-- ITEMS -->
     <div class="section">
       <div class="section-title">Items</div>
       <div class="items-table" id="itemsContainer"></div>
-      <button class="add-item" id="addItemBtn">+ Add item</button>
+      <button class="add-item" id="addItemBtn" type="button">+ Add item</button>
     </div>
   </div>
 
@@ -55,7 +52,7 @@
     ];
     let tip = 12.5;
 
-    function money(n){return "£"+(n||0).toFixed(2)}
+    function money(n){return "£"+(Number(n)||0).toFixed(2)}
 
     function nextLetter(){
       return String.fromCharCode(65 + people.length);
@@ -68,86 +65,86 @@
 
       items.forEach(i=>{
         let price = Number(i.price)||0;
-        subtotal+=price;
-        if(!i.assigned.length)return;
+        subtotal += price;
+        if(!i.assigned.length) return;
 
-        let share = price/i.assigned.length;
+        let share = price / i.assigned.length;
         i.assigned.forEach(p=>map[p]+=share);
       });
 
-      let tipAmount = subtotal*(tip/100);
-      let final={};
+      let tipAmount = subtotal * (tip/100);
+      let final = {};
 
       people.forEach(p=>{
-        let ratio = subtotal?map[p]/subtotal:0;
-        final[p]=map[p]+ratio*tipAmount;
+        let ratio = subtotal ? map[p]/subtotal : 0;
+        final[p] = map[p] + ratio*tipAmount;
       });
 
-      return {subtotal,tipAmount,grand:subtotal+tipAmount,final};
+      return { subtotal, tipAmount, grand: subtotal + tipAmount, final };
     }
 
     function renderPeople(){
       let row = document.getElementById("peopleRow");
-      row.innerHTML="";
+      row.innerHTML = "";
       let t = totals();
 
       people.forEach(p=>{
-        let el=document.createElement("div");
-        el.className="person-pill";
-        el.innerHTML=`<div>${p}</div><div><b>${money(t.final[p])}</b></div>`;
+        let el = document.createElement("div");
+        el.className = "person-pill";
+        el.innerHTML = `<div>${p}</div><div><b>${money(t.final[p])}</b></div>`;
         row.appendChild(el);
       });
     }
 
     function renderItems(){
-      let c=document.getElementById("itemsContainer");
-      c.innerHTML="";
+      let c = document.getElementById("itemsContainer");
+      c.innerHTML = "";
 
       items.forEach((item,i)=>{
-        let row=document.createElement("div");
-        row.className="item-row";
+        let row = document.createElement("div");
+        row.className = "item-row";
 
-        let name=document.createElement("input");
-        name.className="item-name";
-        name.value=item.name;
-        name.oninput=e=>{item.name=e.target.value;render()};
+        let name = document.createElement("input");
+        name.className = "item-name";
+        name.value = item.name;
+        name.oninput = e => { item.name = e.target.value; render(); };
 
-        let price=document.createElement("input");
-        price.className="item-price";
-        price.type="number";
-        price.value=item.price;
-        price.oninput=e=>{item.price=Number(e.target.value);render()};
+        let price = document.createElement("input");
+        price.className = "item-price";
+        price.type = "number";
+        price.value = item.price;
+        price.oninput = e => { item.price = Number(e.target.value); render(); };
 
-        let chips=document.createElement("div");
-        chips.className="chips-inline";
+        let chips = document.createElement("div");
+        chips.className = "chips-inline";
 
         people.forEach(p=>{
-          let chip=document.createElement("div");
-          chip.className="chip"+(item.assigned.includes(p)?" selected":"");
-          chip.textContent=p;
-          chip.onclick=()=>{
-            item.assigned=item.assigned.includes(p)
-              ?item.assigned.filter(x=>x!==p)
-              :[...item.assigned,p];
+          let chip = document.createElement("div");
+          chip.className = "chip" + (item.assigned.includes(p) ? " selected" : "");
+          chip.textContent = p;
+          chip.onclick = ()=>{
+            item.assigned = item.assigned.includes(p)
+              ? item.assigned.filter(x=>x!==p)
+              : [...item.assigned,p];
             render();
           };
           chips.appendChild(chip);
         });
 
-        let del=document.createElement("button");
-        del.className="delete-item";
-        del.textContent="×";
-        del.onclick=()=>{items.splice(i,1);render()};
+        let del = document.createElement("button");
+        del.className = "delete-item";
+        del.textContent = "×";
+        del.onclick = ()=>{ items.splice(i,1); render(); };
 
-        row.append(name,price,chips,del);
+        row.append(name, price, chips, del);
         c.appendChild(row);
       });
     }
 
     function renderSummary(){
-      let t=totals();
-      document.getElementById("grandTotal").textContent=money(t.grand);
-      document.getElementById("subLine").textContent=
+      let t = totals();
+      document.getElementById("grandTotal").textContent = money(t.grand);
+      document.getElementById("subLine").textContent =
         `Subtotal ${money(t.subtotal)} · Tip ${money(t.tipAmount)}`;
     }
 
@@ -155,21 +152,21 @@
       renderPeople();
       renderItems();
       renderSummary();
-      document.getElementById("tipInput").value=tip;
+      document.getElementById("tipInput").value = tip;
     }
 
-    document.getElementById("addPersonBtn").onclick=()=>{
+    document.getElementById("addPersonBtn").onclick = ()=>{
       people.push(nextLetter());
       render();
     };
 
-    document.getElementById("addItemBtn").onclick=()=>{
+    document.getElementById("addItemBtn").onclick = ()=>{
       items.push({name:"New item",price:0,assigned:[]});
       render();
     };
 
-    document.getElementById("tipInput").oninput=e=>{
-      tip=Number(e.target.value);
+    document.getElementById("tipInput").oninput = e=>{
+      tip = Number(e.target.value);
       render();
     };
 
