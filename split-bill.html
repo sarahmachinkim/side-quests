@@ -83,63 +83,78 @@
       return { subtotal, tipAmount, grand: subtotal + tipAmount, final };
     }
 
-    function renderPeople(){
-      let row = document.getElementById("peopleRow");
-      row.innerHTML = "";
-      let t = totals();
+function renderPeople(){
+  let row = document.getElementById("peopleRow");
+  row.innerHTML = "";
+  let t = totals();
 
-      people.forEach(p=>{
-        let el = document.createElement("div");
-        el.className = "person-pill";
-        el.innerHTML = `<div>${p}</div><div><b>${money(t.final[p])}</b></div>`;
-        row.appendChild(el);
-      });
-    }
+  people.forEach(p=>{
+    const amount = t.final[p] || 0;
+    const fraction = t.grand ? amount / t.grand : 1 / people.length;
+    const flexGrow = Math.max(1, fraction * 10);
+
+    let el = document.createElement("div");
+    el.className = "person-pill";
+    el.style.flex = `${flexGrow} 1 0`;
+
+    el.innerHTML = `
+      <div class="person-label">${p}</div>
+      <div class="person-amount">${money(amount)}</div>
+    `;
+
+    row.appendChild(el);
+  });
+}
 
     function renderItems(){
-      let c = document.getElementById("itemsContainer");
-      c.innerHTML = "";
+  let c = document.getElementById("itemsContainer");
+  c.innerHTML = "";
 
-      items.forEach((item,i)=>{
-        let row = document.createElement("div");
-        row.className = "item-row";
+  items.forEach((item,i)=>{
+    let row = document.createElement("div");
+    row.className = "item-row";
 
-        let name = document.createElement("input");
-        name.className = "item-name";
-        name.value = item.name;
-        name.oninput = e => { item.name = e.target.value; render(); };
+    let top = document.createElement("div");
+    top.className = "item-top";
 
-        let price = document.createElement("input");
-        price.className = "item-price";
-        price.type = "number";
-        price.value = item.price;
-        price.oninput = e => { item.price = Number(e.target.value); render(); };
+    let name = document.createElement("input");
+    name.className = "item-name";
+    name.value = item.name;
+    name.oninput = e => { item.name = e.target.value; render(); };
 
-        let chips = document.createElement("div");
-        chips.className = "chips-inline";
+    let price = document.createElement("input");
+    price.className = "item-price";
+    price.type = "number";
+    price.value = item.price;
+    price.oninput = e => { item.price = Number(e.target.value); render(); };
 
-        people.forEach(p=>{
-          let chip = document.createElement("div");
-          chip.className = "chip" + (item.assigned.includes(p) ? " selected" : "");
-          chip.textContent = p;
-          chip.onclick = ()=>{
-            item.assigned = item.assigned.includes(p)
-              ? item.assigned.filter(x=>x!==p)
-              : [...item.assigned,p];
-            render();
-          };
-          chips.appendChild(chip);
-        });
+    let del = document.createElement("button");
+    del.className = "delete-item";
+    del.textContent = "×";
+    del.onclick = ()=>{ items.splice(i,1); render(); };
 
-        let del = document.createElement("button");
-        del.className = "delete-item";
-        del.textContent = "×";
-        del.onclick = ()=>{ items.splice(i,1); render(); };
+    top.append(name, price, del);
 
-        row.append(name, price, chips, del);
-        c.appendChild(row);
-      });
-    }
+    let chips = document.createElement("div");
+    chips.className = "chips-inline";
+
+    people.forEach(p=>{
+      let chip = document.createElement("div");
+      chip.className = "chip" + (item.assigned.includes(p) ? " selected" : "");
+      chip.textContent = p;
+      chip.onclick = ()=>{
+        item.assigned = item.assigned.includes(p)
+          ? item.assigned.filter(x=>x!==p)
+          : [...item.assigned,p];
+        render();
+      };
+      chips.appendChild(chip);
+    });
+
+    row.append(top, chips);
+    c.appendChild(row);
+  });
+}
 
     function renderSummary(){
       let t = totals();
