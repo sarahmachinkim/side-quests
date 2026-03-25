@@ -38,7 +38,7 @@
       { name: "Chips", price: 6, assigned: ["A", "B"] },
       { name: "Wine", price: 18, assigned: ["B", "C"] }
     ];
-    let tipPercent = 10;
+    let tipPercent = 12.5;
 
     function money(n) {
       return "£" + (Number(n) || 0).toFixed(2);
@@ -89,18 +89,28 @@ function renderPeople() {
   row.innerHTML = "";
   const t = totals();
 
-  let allocatedFraction = 0;
+  let widths = [];
 
+  // Calculate raw proportional widths
   people.forEach(p => {
     const itemOnlyAmount = mapAmountForPerson(p);
     const fraction = t.subtotal ? itemOnlyAmount / t.subtotal : 0;
-    allocatedFraction += fraction;
+    widths.push(fraction * 100);
+  });
 
-    const widthPercent = fraction * 100;
+  // Apply minimum width
+  const MIN = 12; // tweak (10–15 works well)
+  let adjusted = widths.map(w => Math.max(w, MIN));
 
+  // Normalise so total = 100%
+  const totalAdjusted = adjusted.reduce((a, b) => a + b, 0);
+  adjusted = adjusted.map(w => (w / totalAdjusted) * 100);
+
+  // Render
+  people.forEach((p, i) => {
     const card = document.createElement("div");
     card.className = "person-summary-card";
-    card.style.flex = `0 0 ${widthPercent}%`;
+    card.style.flex = `0 0 ${adjusted[i]}%`;
 
     card.innerHTML = `
       <div class="person-bar"></div>
@@ -110,15 +120,6 @@ function renderPeople() {
 
     row.appendChild(card);
   });
-
-  const remainderPercent = Math.max(0, 100 - allocatedFraction * 100);
-
-  if (remainderPercent > 0.1) {
-    const remainder = document.createElement("div");
-    remainder.className = "person-summary-remainder";
-    remainder.style.flex = `0 0 ${remainderPercent}%`;
-    row.appendChild(remainder);
-  }
 }
 
 function mapAmountForPerson(person) {
