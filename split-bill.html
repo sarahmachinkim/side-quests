@@ -31,249 +31,233 @@
     </div>
   </div>
 
-  <script>
-    let people = ["A", "B", "C"];
-    let items = [
-      { name: "Burger", price: 12, assigned: ["A"] },
-      { name: "Chips", price: 6, assigned: ["A", "B"] },
-      { name: "Wine", price: 18, assigned: ["B", "C"] }
-    ];
-    let tipPercent = 12.5;
+ <script>
+  let people = ["A", "B", "C"];
+  let items = [
+    { name: "Burger", price: 12, assigned: ["A"] },
+    { name: "Chips", price: 6, assigned: ["A", "B"] },
+    { name: "Wine", price: 18, assigned: ["B", "C"] }
+  ];
+  let tipPercent = 12.5;
 
-    function money(n) {
-      return "£" + (Number(n) || 0).toFixed(2);
-    }
+  function money(n) {
+    return "£" + (Number(n) || 0).toFixed(2);
+  }
 
-    function nextLetter() {
-      return String.fromCharCode(65 + people.length);
-    }
+  function nextLetter() {
+    return String.fromCharCode(65 + people.length);
+  }
 
-   function totals() {
-  let subtotal = 0;
-  let assignedSubtotal = 0;
-  let map = {};
-  people.forEach(p => map[p] = 0);
+  function totals() {
+    let subtotal = 0;
+    let assignedSubtotal = 0;
+    let map = {};
+    people.forEach(p => map[p] = 0);
 
-  items.forEach(i => {
-    let price = Number(i.price) || 0;
-    subtotal += price;
+    items.forEach(i => {
+      let price = Number(i.price) || 0;
+      subtotal += price;
 
-    if (!i.assigned.length) return;
+      if (!i.assigned.length) return;
 
-    assignedSubtotal += price;
+      assignedSubtotal += price;
 
-    let share = price / i.assigned.length;
-    i.assigned.forEach(p => map[p] += share);
-  });
+      let share = price / i.assigned.length;
+      i.assigned.forEach(p => map[p] += share);
+    });
 
-  let tipAmount = subtotal * (tipPercent / 100);
-  let evenTipShare = people.length ? tipAmount / people.length : 0;
-  let final = {};
+    let tipAmount = subtotal * (tipPercent / 100);
+    let evenTipShare = people.length ? tipAmount / people.length : 0;
+    let final = {};
 
-  people.forEach(p => {
-    final[p] = map[p] + evenTipShare;
-  });
+    people.forEach(p => {
+      final[p] = map[p] + evenTipShare;
+    });
 
-  return {
-    subtotal,
-    assignedSubtotal,
-    unassignedSubtotal: subtotal - assignedSubtotal,
-    tipAmount,
-    grand: subtotal + tipAmount,
-    final
-  };
-}
+    return {
+      subtotal,
+      assignedSubtotal,
+      unassignedSubtotal: subtotal - assignedSubtotal,
+      tipAmount,
+      grand: subtotal + tipAmount,
+      final
+    };
+  }
 
-function renderPeople() {
-  const row = document.getElementById("peopleRow");
-  row.innerHTML = "";
-  const t = totals();
+  function mapAmountForPerson(person) {
+    let amount = 0;
 
-  let widths = [];
+    items.forEach(i => {
+      const price = Number(i.price) || 0;
+      if (!i.assigned.length) return;
+      if (!i.assigned.includes(person)) return;
+      amount += price / i.assigned.length;
+    });
 
-  // Calculate raw proportional widths
-  people.forEach(p => {
-    const itemOnlyAmount = mapAmountForPerson(p);
-    const fraction = t.subtotal ? itemOnlyAmount / t.subtotal : 0;
-    widths.push(fraction * 100);
-  });
+    return amount;
+  }
 
-  // Apply minimum width
-  const MIN = 12; // tweak (10–15 works well)
-  let adjusted = widths.map(w => Math.max(w, MIN));
+  function renderPeople() {
+    const row = document.getElementById("peopleRow");
+    row.innerHTML = "";
+    const t = totals();
 
-  // Normalise so total = 100%
-  const totalAdjusted = adjusted.reduce((a, b) => a + b, 0);
-  adjusted = adjusted.map(w => (w / totalAdjusted) * 100);
+    let widths = [];
 
-  // Render
-  people.forEach((p, i) => {
-    const card = document.createElement("div");
-    card.className = "person-summary-card";
-    card.style.flex = `0 0 ${adjusted[i]}%`;
+    people.forEach(p => {
+      const itemOnlyAmount = mapAmountForPerson(p);
+      const fraction = t.subtotal ? itemOnlyAmount / t.subtotal : 0;
+      widths.push(fraction * 100);
+    });
 
-    card.innerHTML = `
-      <div class="person-bar"></div>
-      <div class="person-code">${p}</div>
-      <div class="person-value">${(t.final[p] || 0).toFixed(2)}</div>
-    `;
+    const MIN = 12;
+    let adjusted = widths.map(w => Math.max(w, MIN));
 
-    row.appendChild(card);
-  });
-}
+    const totalAdjusted = adjusted.reduce((a, b) => a + b, 0);
+    adjusted = adjusted.map(w => (w / totalAdjusted) * 100);
 
-function mapAmountForPerson(person) {
-  let amount = 0;
+    people.forEach((p, i) => {
+      const card = document.createElement("div");
+      card.className = "person-summary-card";
+      card.style.flex = `0 0 ${adjusted[i]}%`;
 
-  items.forEach(i => {
-    const price = Number(i.price) || 0;
-    if (!i.assigned.length) return;
-    if (!i.assigned.includes(person)) return;
-    amount += price / i.assigned.length;
-  });
+      card.innerHTML = `
+        <div class="person-bar"></div>
+        <div class="person-code">${p}</div>
+        <div class="person-value">${(t.final[p] || 0).toFixed(2)}</div>
+      `;
 
-  return amount;
-}
+      row.appendChild(card);
+    });
+  }
 
-  // Show the unallocated part as empty remainder
-  const unallocated = document.createElement("div");
-  unallocated.className = "person-summary-remainder";
+  function buildItemRow(item, i) {
+    const row = document.createElement("div");
+    row.className = "item-row";
 
-  const unallocatedFraction = t.grand
-    ? Math.max(0, (t.unassignedSubtotal / t.grand) * 100)
-    : 0;
+    const top = document.createElement("div");
+    top.className = "item-top";
 
-  unallocated.style.flex = `0 0 ${unallocatedFraction}%`;
-  row.appendChild(unallocated);
-}
-
-    function buildItemRow(item, i) {
-      const row = document.createElement("div");
-      row.className = "item-row";
-
-      const top = document.createElement("div");
-      top.className = "item-top";
-
-      const name = document.createElement("input");
-      name.className = "item-name";
-      name.value = item.name;
-      name.oninput = e => {
-        item.name = e.target.value;
-        render();
-      };
-
-      const price = document.createElement("input");
-      price.className = "item-price";
-      price.type = "number";
-      price.value = item.price;
-      price.oninput = e => {
-        item.price = Number(e.target.value);
-        render();
-      };
-
-      const del = document.createElement("button");
-      del.className = "delete-item";
-      del.textContent = "×";
-      del.onclick = () => {
-        items.splice(i, 1);
-        render();
-      };
-
-      top.append(name, price, del);
-
-      const chips = document.createElement("div");
-      chips.className = "chips-inline";
-
-      people.forEach(p => {
-        const chip = document.createElement("div");
-        chip.className = "chip" + (item.assigned.includes(p) ? " selected" : "");
-        chip.textContent = p;
-        chip.onclick = () => {
-          item.assigned = item.assigned.includes(p)
-            ? item.assigned.filter(x => x !== p)
-            : [...item.assigned, p];
-          render();
-        };
-        chips.appendChild(chip);
-      });
-
-      row.append(top, chips);
-      return row;
-    }
-
-    function buildTipRow() {
-      const row = document.createElement("div");
-      row.className = "item-row tip-row-item";
-
-      const top = document.createElement("div");
-      top.className = "item-top";
-
-      const tipName = document.createElement("div");
-      tipName.className = "item-name tip-display";
-      tipName.textContent = `${money(totals().tipAmount)} Tip`;
-
-      const tipPct = document.createElement("input");
-      tipPct.className = "item-price tip-percent-input";
-      tipPct.type = "number";
-      tipPct.value = tipPercent;
-      tipPct.oninput = e => {
-        tipPercent = Number(e.target.value);
-        render();
-      };
-
-      const lock = document.createElement("div");
-      lock.className = "delete-item tip-lock";
-      lock.textContent = "—";
-
-      top.append(tipName, tipPct, lock);
-
-      const chips = document.createElement("div");
-      chips.className = "chips-inline";
-
-      people.forEach(p => {
-        const chip = document.createElement("div");
-        chip.className = "chip chip-muted selected";
-        chip.textContent = p;
-        chips.appendChild(chip);
-      });
-
-      row.append(top, chips);
-      return row;
-    }
-
-    function renderItems() {
-      const c = document.getElementById("itemsContainer");
-      c.innerHTML = "";
-
-      items.forEach((item, i) => {
-        c.appendChild(buildItemRow(item, i));
-      });
-
-      c.appendChild(buildTipRow());
-    }
-
-    function renderSummary() {
-      const t = totals();
-      document.getElementById("grandTotalLine").textContent = `Total = ${money(t.grand)}`;
-    }
-
-    function render() {
-      renderPeople();
-      renderItems();
-      renderSummary();
-    }
-
-    document.getElementById("addPersonBtn").onclick = () => {
-      people.push(nextLetter());
+    const name = document.createElement("input");
+    name.className = "item-name";
+    name.value = item.name;
+    name.oninput = e => {
+      item.name = e.target.value;
       render();
     };
 
-    document.getElementById("addItemBtn").onclick = () => {
-      items.push({ name: "New item", price: 0, assigned: [] });
+    const price = document.createElement("input");
+    price.className = "item-price";
+    price.type = "number";
+    price.value = item.price;
+    price.oninput = e => {
+      item.price = Number(e.target.value);
       render();
     };
 
+    const del = document.createElement("button");
+    del.className = "delete-item";
+    del.textContent = "×";
+    del.onclick = () => {
+      items.splice(i, 1);
+      render();
+    };
+
+    top.append(name, price, del);
+
+    const chips = document.createElement("div");
+    chips.className = "chips-inline";
+
+    people.forEach(p => {
+      const chip = document.createElement("div");
+      chip.className = "chip" + (item.assigned.includes(p) ? " selected" : "");
+      chip.textContent = p;
+      chip.onclick = () => {
+        item.assigned = item.assigned.includes(p)
+          ? item.assigned.filter(x => x !== p)
+          : [...item.assigned, p];
+        render();
+      };
+      chips.appendChild(chip);
+    });
+
+    row.append(top, chips);
+    return row;
+  }
+
+  function buildTipRow() {
+    const row = document.createElement("div");
+    row.className = "item-row tip-row-item";
+
+    const top = document.createElement("div");
+    top.className = "item-top";
+
+    const tipName = document.createElement("div");
+    tipName.className = "item-name tip-display";
+    tipName.textContent = `${money(totals().tipAmount)} Tip`;
+
+    const tipPct = document.createElement("input");
+    tipPct.className = "item-price tip-percent-input";
+    tipPct.type = "number";
+    tipPct.value = tipPercent;
+    tipPct.oninput = e => {
+      tipPercent = Number(e.target.value);
+      render();
+    };
+
+    const lock = document.createElement("div");
+    lock.className = "delete-item tip-lock";
+    lock.textContent = "—";
+
+    top.append(tipName, tipPct, lock);
+
+    const chips = document.createElement("div");
+    chips.className = "chips-inline";
+
+    people.forEach(p => {
+      const chip = document.createElement("div");
+      chip.className = "chip chip-muted selected";
+      chip.textContent = p;
+      chips.appendChild(chip);
+    });
+
+    row.append(top, chips);
+    return row;
+  }
+
+  function renderItems() {
+    const c = document.getElementById("itemsContainer");
+    c.innerHTML = "";
+
+    items.forEach((item, i) => {
+      c.appendChild(buildItemRow(item, i));
+    });
+
+    c.appendChild(buildTipRow());
+  }
+
+  function renderSummary() {
+    const t = totals();
+    document.getElementById("grandTotalLine").textContent = `Total = ${money(t.grand)}`;
+  }
+
+  function render() {
+    renderPeople();
+    renderItems();
+    renderSummary();
+  }
+
+  document.getElementById("addPersonBtn").onclick = () => {
+    people.push(nextLetter());
     render();
-  </script>
+  };
+
+  document.getElementById("addItemBtn").onclick = () => {
+    items.push({ name: "New item", price: 0, assigned: [] });
+    render();
+  };
+
+  render();
+</script>
 </body>
 </html>
