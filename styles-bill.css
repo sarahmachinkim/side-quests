@@ -1,206 +1,174 @@
-<body>
-  <div class="app">
-    <h1>Split the bill</h1>
-    <p class="sub">Tap letters to assign items.</p>
+* { box-sizing: border-box; }
 
-    <!-- TOP: PEOPLE + SUMMARY -->
-    <div class="section">
-      <div class="section-title">Split</div>
+:root {
+  --bg: #f5f5f3;
+  --card: #ffffff;
+  --text: #111111;
+  --muted: #666666;
+  --line: #dddddd;
+  --chip: #ffffff;
+  --chip-on: #111111;
+  --chip-on-text: #ffffff;
+}
 
-      <div class="people-row" id="peopleRow"></div>
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
 
-      <div class="people-row" style="margin-top:8px;">
-        <div class="add-person" id="addPersonBtn">+</div>
-      </div>
+.app {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 12px;
+}
 
-      <div style="margin-top:12px;">
-        <div class="summary-top">
-          <strong>Total</strong>
-          <div class="total-amount" id="grandTotal">£0.00</div>
-        </div>
+h1 {
+  margin: 0 0 4px;
+  font-size: 28px;
+}
 
-        <div class="tip-row">
-          <div class="tip-label">Tip %</div>
-          <input class="tip-input" id="tipInput" type="number" step="0.1" value="12.5" />
-        </div>
+.sub {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
 
-        <div class="sub-line" id="subLine">
-          Subtotal £0.00 · Tip £0.00
-        </div>
-      </div>
-    </div>
+.section {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
 
-    <!-- ITEMS -->
-    <div class="section">
-      <div class="section-title">Items</div>
-      <div class="items-table" id="itemsContainer"></div>
-      <button class="add-item" id="addItemBtn" type="button">+ Add item</button>
-    </div>
-  </div>
+.section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
 
-  <script>
-    let people = ["A", "B", "C"];
-    let items = [
-      { name: "Burger", price: 12, assigned: ["A"] },
-      { name: "Chips", price: 6, assigned: ["A", "B"] },
-      { name: "Wine", price: 18, assigned: ["B", "C"] }
-    ];
-    let tip = 12.5;
+.people-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
 
-    function money(n) {
-      return "£" + (Number(n) || 0).toFixed(2);
-    }
+.person-pill {
+  min-height: 50px;
+  min-width: 86px;
+  padding: 8px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-    function nextLetter() {
-      return String.fromCharCode(65 + people.length);
-    }
+.add-person {
+  min-height: 50px;
+  min-width: 60px;
+  border-radius: 14px;
+  border: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+}
 
-    function calculateTotals() {
-      const subtotals = {};
-      const itemMap = {};
-      people.forEach(p => {
-        subtotals[p] = 0;
-        itemMap[p] = [];
-      });
+.items-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-      let subtotal = 0;
+.item-row {
+  display: grid;
+  grid-template-columns: 1fr 70px auto 32px;
+  gap: 6px;
+  align-items: center;
+}
 
-      items.forEach(item => {
-        const price = Number(item.price) || 0;
-        subtotal += price;
+.item-name,
+.item-price,
+.tip-input {
+  min-height: 38px;
+  border: 1px solid #cfcfcf;
+  border-radius: 10px;
+  padding: 0 10px;
+  font-size: 15px;
+}
 
-        if (!item.assigned.length) return;
+.chips-inline {
+  display: flex;
+  gap: 4px;
+}
 
-        const share = price / item.assigned.length;
+.chip {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-        item.assigned.forEach(person => {
-          subtotals[person] += share;
-          itemMap[person].push(item.name || "Item");
-        });
-      });
+.chip.selected {
+  background: #111;
+  color: #fff;
+}
 
-      const tipAmount = subtotal * (tip / 100);
-      const final = {};
+.delete-item {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+}
 
-      people.forEach(p => {
-        const ratio = subtotal > 0 ? subtotals[p] / subtotal : 0;
-        final[p] = subtotals[p] + ratio * tipAmount;
-      });
+.add-item {
+  width: 100%;
+  min-height: 40px;
+  border-radius: 12px;
+  border: 1px dashed #bcbcbc;
+  background: #fff;
+  margin-top: 8px;
+  cursor: pointer;
+}
 
-      return { subtotal, tipAmount, grandTotal: subtotal + tipAmount, final, itemMap };
-    }
+.summary-top {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
 
-    function toggleAssignment(i, p) {
-      const a = items[i].assigned;
-      items[i].assigned = a.includes(p) ? a.filter(x => x !== p) : [...a, p];
-      render();
-    }
+.total-amount {
+  font-size: 22px;
+  font-weight: bold;
+}
 
-    function addPerson() {
-      people.push(nextLetter());
-      render();
-    }
+.tip-row {
+  display: flex;
+  gap: 8px;
+  margin: 8px 0;
+}
 
-    function addItem() {
-      items.push({ name: "New item", price: 0, assigned: [] });
-      render();
-    }
+.tip-input {
+  width: 70px;
+}
 
-    function deleteItem(i) {
-      items.splice(i, 1);
-      render();
-    }
-
-    // 🔑 UPDATED: people now show totals
-    function renderPeople() {
-      const row = document.getElementById("peopleRow");
-      row.innerHTML = "";
-
-      const totals = calculateTotals();
-
-      people.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "person-pill";
-
-        const amount = totals.final[p] || 0;
-
-        card.innerHTML = `
-          <div style="text-align:center;">
-            <div style="font-size:12px;">${p}</div>
-            <div style="font-weight:700;">${money(amount)}</div>
-          </div>
-        `;
-
-        row.appendChild(card);
-      });
-    }
-
-    function renderItems() {
-      const container = document.getElementById("itemsContainer");
-      container.innerHTML = "";
-
-      items.forEach((item, i) => {
-        const row = document.createElement("div");
-        row.className = "item-row";
-
-        const name = document.createElement("input");
-        name.className = "item-name";
-        name.value = item.name;
-        name.oninput = e => { items[i].name = e.target.value; render(); };
-
-        const price = document.createElement("input");
-        price.className = "item-price";
-        price.type = "number";
-        price.value = item.price;
-        price.oninput = e => { items[i].price = Number(e.target.value); render(); };
-
-        const chips = document.createElement("div");
-        chips.className = "chips-inline";
-
-        people.forEach(p => {
-          const chip = document.createElement("div");
-          chip.className = "chip" + (item.assigned.includes(p) ? " selected" : "");
-          chip.textContent = p;
-          chip.onclick = () => toggleAssignment(i, p);
-          chips.appendChild(chip);
-        });
-
-        const del = document.createElement("button");
-        del.className = "delete-item";
-        del.textContent = "×";
-        del.onclick = () => deleteItem(i);
-
-        row.appendChild(name);
-        row.appendChild(price);
-        row.appendChild(chips);
-        row.appendChild(del);
-
-        container.appendChild(row);
-      });
-    }
-
-    function renderSummary() {
-      const t = calculateTotals();
-
-      document.getElementById("grandTotal").textContent = money(t.grandTotal);
-      document.getElementById("subLine").textContent =
-        `Subtotal ${money(t.subtotal)} · Tip ${money(t.tipAmount)}`;
-    }
-
-    function render() {
-      renderPeople();
-      renderItems();
-      renderSummary();
-      document.getElementById("tipInput").value = tip;
-    }
-
-    document.getElementById("addPersonBtn").onclick = addPerson;
-    document.getElementById("addItemBtn").onclick = addItem;
-    document.getElementById("tipInput").oninput = e => {
-      tip = Number(e.target.value);
-      render();
-    };
-
-    render();
-  </script>
-</body>
+.sub-line {
+  font-size: 12px;
+  color: var(--muted);
+}
