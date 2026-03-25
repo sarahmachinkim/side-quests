@@ -59,12 +59,11 @@ html, body {
 .people-summary {
   display: flex;
   gap: 8px;
-  align-items: stretch;
+  align-items: flex-start;
 }
 
 .person-summary-card {
-  min-width: 52px;
-  background: transparent;
+  min-width: 28px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -74,8 +73,9 @@ html, body {
 }
 
 .person-bar {
-  width: 14px;
-  height: 28px;
+  width: 100%;
+  min-width: 14px;
+  height: 34px;
   border-radius: 6px;
   background: #e1e1de;
   margin-bottom: 4px;
