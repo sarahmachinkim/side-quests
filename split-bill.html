@@ -87,11 +87,13 @@ function renderPeople() {
   people.forEach(p => {
     const amount = t.final[p] || 0;
     const fraction = t.grand ? amount / t.grand : 1 / Math.max(people.length, 1);
-    const flexGrow = Math.max(1, fraction * 12);
+
+    // Give every person a visible minimum, then add proportional width
+    const widthPercent = Math.max(12, fraction * 100);
 
     const card = document.createElement("div");
     card.className = "person-summary-card";
-    card.style.flex = `${flexGrow} 1 0`;
+    card.style.flex = `0 0 ${widthPercent}%`;
 
     card.innerHTML = `
       <div class="person-bar"></div>
