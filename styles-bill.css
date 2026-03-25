@@ -56,13 +56,13 @@ h1 {
 .people-row {
   display: flex;
   gap: 6px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: stretch;
 }
 
 .person-pill {
-  min-height: 50px;
-  min-width: 86px;
-  padding: 8px;
+  min-height: 72px;
+  padding: 8px 10px;
   border-radius: 14px;
   border: 1px solid var(--line);
   background: #fff;
@@ -70,11 +70,25 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-width: 72px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.person-label {
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.person-amount {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.1;
 }
 
 .add-person {
-  min-height: 50px;
-  min-width: 60px;
+  min-height: 72px;
+  min-width: 56px;
   border-radius: 14px;
   border: 1px dashed var(--line);
   display: flex;
@@ -82,19 +96,29 @@ h1 {
   justify-content: center;
   font-size: 24px;
   cursor: pointer;
+  background: #fff;
+  flex: 0 0 auto;
 }
 
 .items-table {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .item-row {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 8px;
+  background: #fff;
+}
+
+.item-top {
   display: grid;
-  grid-template-columns: 1fr 70px auto 32px;
+  grid-template-columns: minmax(0, 1fr) 78px 34px;
   gap: 6px;
   align-items: center;
+  margin-bottom: 8px;
 }
 
 .item-name,
@@ -107,16 +131,18 @@ h1 {
   font-size: 15px;
   background: #fff;
   color: var(--text);
+  width: 100%;
 }
 
 .chips-inline {
   display: flex;
-  gap: 4px;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .chip {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border-radius: 999px;
   border: 1px solid #111;
   display: flex;
@@ -126,6 +152,7 @@ h1 {
   cursor: pointer;
   background: #fff;
   color: #111;
+  flex: 0 0 auto;
 }
 
 .chip.selected {
@@ -134,8 +161,8 @@ h1 {
 }
 
 .delete-item {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border-radius: 8px;
   border: 1px solid var(--line);
   background: #fff;
@@ -156,6 +183,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   margin-top: 12px;
+  align-items: baseline;
 }
 
 .total-amount {
