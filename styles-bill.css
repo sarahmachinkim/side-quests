@@ -71,7 +71,11 @@ html, body {
 
 .person-bar-wrap {
   min-width: 0;
-  padding-right: 6px;
+  display: flex;
+}
+
+.person-bar-wrap + .person-bar-wrap {
+  margin-left: 6px;
 }
 
 .person-bar-wrap:last-child {
