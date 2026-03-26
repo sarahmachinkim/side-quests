@@ -121,16 +121,18 @@ function renderPeople() {
     const barWrap = document.createElement("div");
     barWrap.className = "person-bar-wrap";
 
-    if (rawPercent > 0) {
-      if (rawPercent < 3) {
-        barWrap.style.flex = "0 0 12px";
-      } else {
-        barWrap.style.flex = `1 1 ${rawPercent}%`;
-        barWrap.style.minWidth = "24px";
-      }
-    } else {
-      barWrap.style.flex = "0 0 0";
-    }
+if (rawPercent > 0) {
+  if (rawPercent < 3) {
+    barWrap.style.flex = "0 0 18px";
+    barWrap.style.minWidth = "18px";
+  } else {
+    barWrap.style.flex = `1 1 ${rawPercent}%`;
+    barWrap.style.minWidth = "24px";
+  }
+} else {
+  barWrap.style.flex = "0 0 0";
+  barWrap.style.minWidth = "0";
+}
 
     const bar = document.createElement("div");
     bar.className = "person-bar";
@@ -140,7 +142,7 @@ function renderPeople() {
 const label = document.createElement("div");
 label.className = "person-label-card";
 label.style.flex = barWrap.style.flex;
-label.style.minWidth = barWrap.style.minWidth || "24px";
+label.style.minWidth = barWrap.style.minWidth || "0";
 
 label.innerHTML = `
   <div class="person-code">${p}</div>
