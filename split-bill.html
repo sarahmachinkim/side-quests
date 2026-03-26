@@ -137,13 +137,15 @@ function renderPeople() {
     barWrap.appendChild(bar);
     barsRow.appendChild(barWrap);
 
-    const label = document.createElement("div");
-    label.className = "person-label-card";
-    label.innerHTML = `
-      <div class="person-code">${p}</div>
-      <div class="person-value">${amountIncludingTip.toFixed(2)}</div>
-    `;
+const label = document.createElement("div");
+label.className = "person-label-card";
 label.style.flex = barWrap.style.flex;
+label.style.minWidth = "32px";
+
+label.innerHTML = `
+  <div class="person-code">${p}</div>
+  <div class="person-value">${amountIncludingTip.toFixed(2)}</div>
+`;
 labelsRow.appendChild(label);
     
   });
