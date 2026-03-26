@@ -126,6 +126,7 @@ function renderPeople() {
         barWrap.style.flex = "0 0 12px";
       } else {
         barWrap.style.flex = `0 0 ${rawPercent}%`;
+        barWrap.style.minWidth = "32px";
       }
     } else {
       barWrap.style.flex = "0 0 0";
