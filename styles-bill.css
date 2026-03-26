@@ -106,19 +106,20 @@ html, body {
 }
 
 .person-label-card {
-  min-width: 0;
+  min-width: 32px;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .person-code {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.1;
   margin-bottom: 2px;
   font-weight: 600;
 }
 
 .person-value {
-  font-size: 14px;
+  font-size: 11px;
   line-height: 1.1;
   color: #555;
 }
