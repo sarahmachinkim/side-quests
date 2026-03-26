@@ -97,43 +97,61 @@
     return amount;
   }
 
- function renderPeople() {
+function renderPeople() {
   const row = document.getElementById("peopleRow");
   row.innerHTML = "";
   const t = totals();
 
-  let widths = [];
+  const barsRow = document.createElement("div");
+  barsRow.className = "people-bars-row";
+
+  const labelsRow = document.createElement("div");
+  labelsRow.className = "people-labels-row";
+
+  const evenTipShare = people.length ? t.tipAmount / people.length : 0;
+  let allocatedPercent = 0;
 
   people.forEach(p => {
     const itemOnlyAmount = mapAmountForPerson(p);
-    const fraction = t.subtotal ? itemOnlyAmount / t.subtotal : 0;
-    widths.push(fraction * 100);
+    const amountIncludingTip = itemOnlyAmount + evenTipShare;
+
+    const rawPercent = t.grand ? (amountIncludingTip / t.grand) * 100 : 0;
+    const visiblePercent = rawPercent > 0 ? Math.max(rawPercent, 6) : 0;
+    allocatedPercent += visiblePercent;
+
+    const barWrap = document.createElement("div");
+    barWrap.className = "person-bar-wrap";
+    barWrap.style.flex = `0 0 ${visiblePercent}%`;
+
+    const bar = document.createElement("div");
+    bar.className = "person-bar";
+    barWrap.appendChild(bar);
+    barsRow.appendChild(barWrap);
+
+    const label = document.createElement("div");
+    label.className = "person-label-card";
+    label.innerHTML = `
+      <div class="person-code">${p}</div>
+      <div class="person-value">${amountIncludingTip.toFixed(2)}</div>
+    `;
+    labelsRow.appendChild(label);
   });
 
-  const MIN = 12;
-  let adjusted = widths.map(w => (w > 0 ? Math.max(w, MIN) : 0));
+  const remainderPercent = Math.max(0, 100 - allocatedPercent);
+  if (remainderPercent > 0.1) {
+    const remainder = document.createElement("div");
+    remainder.className = "person-bar-wrap";
+    remainder.style.flex = `0 0 ${remainderPercent}%`;
 
-  const totalAdjusted = adjusted.reduce((a, b) => a + b, 0);
+    const remainderBar = document.createElement("div");
+    remainderBar.className = "person-bar remainder-bar";
+    remainder.appendChild(remainderBar);
 
-  if (totalAdjusted > 0) {
-    adjusted = adjusted.map(w => (w / totalAdjusted) * 100);
+    barsRow.appendChild(remainder);
   }
 
-  people.forEach((p, i) => {
-    const displayAmount = t.final[p] || 0;
-
-    const card = document.createElement("div");
-    card.className = "person-summary-card";
-    card.style.flex = adjusted[i] > 0 ? `0 0 ${adjusted[i]}%` : "0 0 0%";
-
-    card.innerHTML = `
-      <div class="person-bar"></div>
-      <div class="person-code">${p}</div>
-      <div class="person-value">${displayAmount.toFixed(2)}</div>
-    `;
-
-    row.appendChild(card);
-  });
+  row.appendChild(barsRow);
+  row.appendChild(labelsRow);
 }
 
   function buildItemRow(item, i) {
