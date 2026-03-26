@@ -58,24 +58,23 @@ html, body {
 
 .people-summary {
   display: flex;
-  gap: 0;
-  align-items: flex-start;
-  width: 100%;
-  overflow: hidden;
-}
-
-.person-summary-card {
-  min-width: 0;
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: center;
-  overflow: hidden;
-  padding-right: 8px;
+  gap: 8px;
+  width: 100%;
 }
 
-.person-summary-card:last-child {
+.people-bars-row {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+.person-bar-wrap {
+  min-width: 0;
+  padding-right: 6px;
+}
+
+.person-bar-wrap:last-child {
   padding-right: 0;
 }
 
@@ -84,7 +83,23 @@ html, body {
   height: 34px;
   border-radius: 6px;
   background: #e1e1de;
-  margin-bottom: 4px;
+}
+
+.remainder-bar {
+  background: transparent;
+  border: 1px dashed #d8d8d4;
+}
+
+.people-labels-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.person-label-card {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
 }
 
 .person-code {
@@ -243,8 +258,4 @@ html, body {
   margin-top: 8px;
   cursor: pointer;
   font-size: 15px;
-}
-
-.person-summary-remainder {
-  min-width: 0;
 }
