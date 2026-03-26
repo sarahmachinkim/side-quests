@@ -57,14 +57,6 @@ html, body {
   overflow: hidden;
 }
 
-.people-summary-wrap {
-  border: 1px dashed var(--line);
-  border-radius: 12px;
-  padding: 10px;
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-
 .people-summary {
   display: flex;
   flex-direction: column;
@@ -73,10 +65,12 @@ html, body {
   min-width: 0;
 }
 
-.people-labels-row {
+.people-bars-row {
   display: flex;
   width: 100%;
-  margin-top: 6px;
+  min-width: 0;
+  align-items: stretch;
+  overflow: hidden;
 }
 
 .person-bar-wrap {
@@ -87,10 +81,6 @@ html, body {
 
 .person-bar-wrap + .person-bar-wrap {
   margin-left: 6px;
-}
-
-.person-bar-wrap:last-child {
-  padding-right: 0;
 }
 
 .person-bar {
