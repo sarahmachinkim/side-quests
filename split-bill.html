@@ -97,39 +97,44 @@
     return amount;
   }
 
-  function renderPeople() {
-    const row = document.getElementById("peopleRow");
-    row.innerHTML = "";
-    const t = totals();
+ function renderPeople() {
+  const row = document.getElementById("peopleRow");
+  row.innerHTML = "";
+  const t = totals();
 
-    let widths = [];
+  let widths = [];
 
-    people.forEach(p => {
-      const itemOnlyAmount = mapAmountForPerson(p);
-      const fraction = t.subtotal ? itemOnlyAmount / t.subtotal : 0;
-      widths.push(fraction * 100);
-    });
+  people.forEach(p => {
+    const itemOnlyAmount = mapAmountForPerson(p);
+    const fraction = t.subtotal ? itemOnlyAmount / t.subtotal : 0;
+    widths.push(fraction * 100);
+  });
 
-    const MIN = 12;
-    let adjusted = widths.map(w => Math.max(w, MIN));
+  const MIN = 12;
+  let adjusted = widths.map(w => (w > 0 ? Math.max(w, MIN) : 0));
 
-    const totalAdjusted = adjusted.reduce((a, b) => a + b, 0);
+  const totalAdjusted = adjusted.reduce((a, b) => a + b, 0);
+
+  if (totalAdjusted > 0) {
     adjusted = adjusted.map(w => (w / totalAdjusted) * 100);
-
-    people.forEach((p, i) => {
-      const card = document.createElement("div");
-      card.className = "person-summary-card";
-      card.style.flex = `0 0 ${adjusted[i]}%`;
-
-      card.innerHTML = `
-        <div class="person-bar"></div>
-        <div class="person-code">${p}</div>
-        <div class="person-value">${(t.final[p] || 0).toFixed(2)}</div>
-      `;
-
-      row.appendChild(card);
-    });
   }
+
+  people.forEach((p, i) => {
+    const itemOnlyAmount = mapAmountForPerson(p);
+
+    const card = document.createElement("div");
+    card.className = "person-summary-card";
+    card.style.flex = adjusted[i] > 0 ? `0 0 ${adjusted[i]}%` : "0 0 0%";
+
+    card.innerHTML = `
+      <div class="person-bar"></div>
+      <div class="person-code">${p}</div>
+      <div class="person-value">${itemOnlyAmount.toFixed(2)}</div>
+    `;
+
+    row.appendChild(card);
+  });
+}
 
   function buildItemRow(item, i) {
     const row = document.createElement("div");
