@@ -80,7 +80,7 @@ html, body {
 }
 
 .person-bar-wrap + .person-bar-wrap {
-  margin-left: 1px;
+  margin-left: 2px;
 }
 
 .person-bar-wrap:last-child {
