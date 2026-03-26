@@ -66,12 +66,17 @@ html, body {
 .people-bars-row {
   display: flex;
   width: 100%;
-  align-items: stretch;
 }
 
-.person-bar-wrap {
-  min-width: 0;
+.people-labels-row {
   display: flex;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.person-bar-wrap,
+.person-label-card {
+  min-width: 0;
 }
 
 .person-bar-wrap + .person-bar-wrap {
