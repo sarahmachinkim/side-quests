@@ -106,10 +106,15 @@ html, body {
 }
 
 .person-code {
+  font-size: 12px;
+  line-height: 1.1;
+  margin-bottom: 2px;
   font-weight: 600;
 }
 
 .person-value {
+  font-size: 11px;
+  line-height: 1.1;
   color: #555;
 }
 
