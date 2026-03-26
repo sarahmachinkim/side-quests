@@ -116,12 +116,20 @@ function renderPeople() {
     const amountIncludingTip = itemOnlyAmount + evenTipShare;
 
     const rawPercent = t.grand ? (amountIncludingTip / t.grand) * 100 : 0;
-    const visiblePercent = rawPercent > 0 ? Math.max(rawPercent, 6) : 0;
-    allocatedPercent += visiblePercent;
+    allocatedPercent += rawPercent;
 
     const barWrap = document.createElement("div");
     barWrap.className = "person-bar-wrap";
-    barWrap.style.flex = `0 0 ${visiblePercent}%`;
+
+    if (rawPercent > 0) {
+      if (rawPercent < 3) {
+        barWrap.style.flex = "0 0 12px";
+      } else {
+        barWrap.style.flex = `0 0 ${rawPercent}%`;
+      }
+    } else {
+      barWrap.style.flex = "0 0 0";
+    }
 
     const bar = document.createElement("div");
     bar.className = "person-bar";
@@ -138,15 +146,20 @@ function renderPeople() {
   });
 
   const remainderPercent = Math.max(0, 100 - allocatedPercent);
+
   if (remainderPercent > 0.1) {
     const remainder = document.createElement("div");
     remainder.className = "person-bar-wrap";
-    remainder.style.flex = `0 0 ${remainderPercent}%`;
+
+    if (remainderPercent < 3) {
+      remainder.style.flex = "0 0 12px";
+    } else {
+      remainder.style.flex = `0 0 ${remainderPercent}%`;
+    }
 
     const remainderBar = document.createElement("div");
     remainderBar.className = "person-bar remainder-bar";
     remainder.appendChild(remainderBar);
-
     barsRow.appendChild(remainder);
   }
 
